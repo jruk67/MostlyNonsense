@@ -1,0 +1,21 @@
+SELECT *
+FROM [DW_Prod].[lithia].[vw_GL_Detail]
+WHERE [AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] IN ('70270','70275','71700','71705','71710','71715','71720','71725','71726','72050','72055','74901','74902','74903','74904','74905') AND [CoNo] < 20000 AND [CoNo] NOT IN ('1','12','13','14','16','18','21','22','171','255','260','261','729')
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] IN ('73060','74900','74910') AND [CoNo] = '21'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] IN ('74900','74905') AND [CoNo] = '18'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] IN ('70050','74900') AND [CoNo] = '1'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '74900' AND [CoNo] = '16'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '74900' AND [CoNo] = '105'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '74900' AND [CoNo] = '171'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '74900' AND [CoNo] = '238'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '74900' AND [CoNo] = '22'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '74900' AND [CoNo] = '3'

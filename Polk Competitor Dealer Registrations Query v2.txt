@@ -1,0 +1,16 @@
+SELECT DISTINCT COUNT (fp.[VIN]) AS "Vehicles Registered", ds.[State_Name],dd.[Date], dd.[Day_Name], dr.[Dealer_Name], mm.[Make_Name] AS "Make", mm.[Model_Name] AS "Model"
+FROM [Polk_Prod].[dbo].[Fact_Polk] AS fp
+JOIN [Polk_Prod].[dbo].[Dim_Polk_Dlr_Reg] AS dr
+ON fp.[Dlr_Reg_Key] = dr.[Dlr_Reg_Key]
+JOIN [Polk_Prod].[dbo].[Dim_Polk_Make_Model] AS mm
+ON fp.[MM_Key] = mm.[MM_Key]
+JOIN [Polk_Prod].[dbo].[Dim_Polk_Date] AS dd
+ON fp.[Date_Key] = dd.[Date_Key]
+JOIN [DW_Prod].[dbo].[dim_States] AS ds
+ON dr.[Dealer_State] = ds.[State_Code] 
+WHERE dd.[Date] BETWEEN '1/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%Lithia%')
+OR dd.[Date] BETWEEN '1/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%Penske%')
+OR dd.[Date] BETWEEN '1/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%Carmax%')
+OR dd.[Date] BETWEEN '1/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%AutoNation%') 
+GROUP BY ds.[State_Name], dd.[Date], dd.[Day_Name], dr.[Dealer_Name], mm.[Make_Name], mm.[Model_Name]
+ORDER BY ds.[State_Name] ASC

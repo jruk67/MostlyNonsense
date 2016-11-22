@@ -1,0 +1,19 @@
+SELECT d.[Sched]
+      ,d.[Schedule_Name]
+      ,d.[Current_Month]
+      ,d.[CoNo]
+      ,d.[Company_Name]
+      ,d.[Acct]
+      ,d.[control]
+      ,d.[AcctgDate]
+      ,s.[DOOSI]
+      ,d.[Jnl]
+      ,d.[Reference]
+      ,d.[Doc_Description]
+      ,d.[Amt]
+      ,d.[Control2]
+      ,d.[Detail_Description]
+FROM [DW_Prod].[lithia].[vw_Schedules_Detail] as d
+JOIN [DW_Prod].[lithia].[vw_Schedules_Summary] as s
+ON d.[Sched] = s.[Sched]
+WHERE ((d.[Company_Name] LIKE ? AND d.[Sched] = ? AND d.[AcctgDate] BETWEEN ? AND ? AND d.[Jnl] NOT IN ('BF','SS')) OR (d.[CoNo] = ? AND d.[Sched] = ? AND d.[AcctgDate] BETWEEN ? AND ? AND d.[Jnl] NOT IN ('BF','SS'))) OR ((d.[Company_Name] LIKE ? AND d.[Jnl] = ? AND d.[AcctgDate] BETWEEN ? AND ? AND d.[Jnl] NOT IN ('BF','SS')) OR (d.[CoNo] = ? AND d.[Jnl] = ? AND d.[AcctgDate] BETWEEN ? AND ? AND d.[Jnl] NOT IN ('BF','SS'))) OR ((d.[Company_Name] LIKE ? AND d.[Acct] = ? AND d.[AcctgDate] BETWEEN ? AND ? AND d.[Jnl] NOT IN ('BF','SS')) OR (d.[CoNo] = ? AND d.[Acct] = ? AND d.[AcctgDate] BETWEEN ? AND ? AND d.[Jnl] NOT IN ('BF','SS')))

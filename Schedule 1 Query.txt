@@ -1,0 +1,23 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT [CoNo]
+      ,[Name]
+      ,[AcctgDate]
+      ,[IC]
+      ,[Jnl]
+      ,[Reference]
+      ,[Doc_Description]
+      ,[AcctNum]
+      ,[Account_Description]
+      ,[Amt]
+      ,[Control]
+      ,[Control2]
+      ,[Detail_Description]
+      ,[Posted]
+      ,[Void]
+FROM [DW_Prod].[lithia].[vw_GL_Detail]
+WHERE ([Void]='0') and ([AcctgDate] between '1/1/2015' and '12/31/2015') and ([AcctNum]='20300') or ([Void]='0') and ([AcctgDate] between '1/1/2015' and '12/31/2015') and ([AcctNum]='21100') or ([Void]='0') and ([AcctgDate] between '1/1/2015' and '12/31/2015') and ([AcctNum]='30100') or ([Void]='0') and ([AcctgDate] between '1/1/2015' and '12/31/2015') and ([AcctNum]='30215')

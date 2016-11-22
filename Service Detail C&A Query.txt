@@ -1,0 +1,39 @@
+SELECT dr.[Company_Number] AS "Store #"
+      ,dco.[Company_Name] AS "Store Name"  
+      ,dcu.[Customer_Number] AS "Customer #"
+      ,(dcu.[First_Name] + ' ' + dcu.[Last_Name]) AS "Customer Name"
+      ,(fr.[Labor_Sale] + fr.[Misc_Sale] + fr.[Parts_Sale] + fr.[Core_Sale] + fr.[Sublet_Sale] + fr.[Shop_Supplies_Sale]) AS "Sales Amount" 
+      ,dl.[Labor_Sale_Account]
+      ,dl.[Parts_Sale_Account]
+      ,dl.[Misc_Sale_Account]
+      ,dl.[Lube_Sale_Account]
+      ,dl.[Sublet_Sale_Account]
+      ,dr.[Open_Date] AS "Open Date"
+      ,dd.[Date] AS "Posted Date"
+      ,dr.[RO_Number] AS "RO #"
+      ,dr.[Vehicle_ID] AS "VIN 8"
+      ,fr.[Actual_Hours] AS "Actual Hours"
+      ,fr.[Sold_Hours] AS "Sold Hours"
+      ,fd.[Add_On_Flag] AS "Add On"
+      ,fd.[Line_Code] AS "RO Line Code"
+      ,dl.[CWI_Class] AS "Pay Type"
+      ,do.[Tech_Description] AS "Service Request"
+      ,do.[Op_Code] AS "Op Code"
+      ,do.[System_Description] AS "Op Code Description"
+      ,dr.[VIN]
+FROM [DW_Prod].[dbo].[Dim_Service_Sale_Repair_Order] AS dr
+JOIN [DW_Prod].[dbo].[Fact_Service_Detail] AS fd
+ON dr.[Repair_Order_Key] = fd.[Repair_Order_Key]
+JOIN [DW_Prod].[dbo].[Dim_Company] AS dco
+ON dr.Company_Number = dco.[Company_Number]
+JOIN [DW_Prod].[dbo].[Fact_Service_RO] AS fr
+ON dr.[Repair_Order_Key] = fr.[Repair_Order_Key]
+JOIN [DW_Prod].[dbo].[Dim_Date] AS dd
+ON fr.[Posted_Date_Key] = dd.[Date_Key]
+JOIN [DW_Prod].[dbo].[Dim_Service_Sale_Labor_Type] AS dl
+ON fd.[Labor_Type_Key] = dl.[Labor_Type_Key]
+JOIN [DW_Prod].[dbo].[Dim_Customer] AS dcu
+ON fd.Customer_Key = dcu.[Customer_Key]
+JOIN [DW_Prod].[dbo].[Dim_Service_Sale_Op_Code] AS do
+ON do.[Op_Code_Key] = fd.Op_Code_Key
+WHERE dco.[Company_Number] = '6' AND dd.[Date] BETWEEN '12/15/2015' AND '2/15/2016'

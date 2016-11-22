@@ -1,0 +1,20 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT
+vw_GL_Detail.CoNo AS "Store #", 
+vw_GL_Detail.Name AS "Store Name", 
+vw_GL_Detail.AcctgDate AS "Accounting Date", 
+vw_GL_Detail.Jnl AS "Journal", 
+vw_GL_Detail.Reference, 
+vw_GL_Detail.Doc_Description AS "Doc Description", 
+vw_GL_Detail.AcctNum + ' ' + vw_GL_Detail.Account_Description AS "Account Description", 
+vw_GL_Detail.Amt AS "Amount", 
+vw_GL_Detail.Control, 
+vw_GL_Detail.Control2, 
+vw_GL_Detail.Detail_Description AS "Detail Description"
+FROM DW_Prod.lithia.vw_GL_Detail vw_GL_Detail
+WHERE (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?) OR (vw_GL_Detail.CoNo=?) AND (vw_GL_Detail.Reference=?)

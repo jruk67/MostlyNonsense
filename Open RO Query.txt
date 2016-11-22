@@ -1,0 +1,13 @@
+DECLARE @start_date AS DATETIME
+DECLARE @end_date AS DATETIME
+SET @start_date = LEFT(CONVERT(VARCHAR,DATEADD(DAY,-30,GETDATE()),100),11)
+SET @end_date = @start_date +21
+SELECT c.[Company_Number], c.[Company_Name], s.[Open_Date], s.[RO_Number], s.[Vehicle_ID], COUNT (s.[RO_Number]) AS "Count of Open Pre-paid RO's"
+FROM [DW_Prod].[dbo].[Fact_Service_RO] AS r
+JOIN [DW_Prod].[dbo].[Dim_Company] AS c
+ON r.[Company_Key] = c.[Company_Key]
+JOIN [DW_Prod].[dbo].[Dim_Service_Sale_Repair_Order] AS s
+ON r.[Repair_Order_Key] = s.[Repair_Order_Key]
+WHERE s.[Open_Date] BETWEEN @start_date AND @end_date AND s.[Closed_Flag] <> 'Y' AND s.[RO_Status_Code] = 'C97' AND c.[Company_Number] NOT IN ('0','3','12','13','14','214')
+GROUP BY c.[Company_Number], c.[Company_Name], s.[Open_Date], s.[RO_Number], s.[Vehicle_ID]
+ORDER BY c.[Company_Number] ASC

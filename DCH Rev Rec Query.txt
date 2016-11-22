@@ -1,0 +1,31 @@
+SELECT *
+FROM [DW_Prod].[lithia].[vw_GL_Detail]
+WHERE [CoNo] > '20000'
+AND [AcctgDate] Between ? And ? 
+AND [AcctNum] between '40000' and '42499'
+AND [Doc_Description] LIKE 'Advent%'
+OR
+[CoNo] > '20000'
+AND [AcctgDate] Between ? And ? 
+AND [AcctNum] between '44000' and '44299'
+AND [Doc_Description] LIKE 'Advent%'
+OR
+[CoNo] > '20000'
+AND [AcctgDate] Between ? And ? 
+AND [AcctNum] = '62310'
+AND [Doc_Description] LIKE 'Advent%'
+OR
+[CoNo] > '20000'
+AND [AcctgDate] Between ? And ? 
+AND [AcctNum] between '4070000' and '4072499'
+AND [Doc_Description] LIKE 'Advent%'
+OR
+[CoNo] > '20000'
+AND [AcctgDate] Between ? And ? 
+AND [AcctNum] between '4270000' and '4272499'
+AND [Doc_Description] LIKE 'Advent%'
+OR
+[CoNo] > '20000'
+AND [AcctgDate] Between ? And ? 
+AND [AcctNum] between '4074000' and '4074299'
+AND [Doc_Description] LIKE 'Advent%'

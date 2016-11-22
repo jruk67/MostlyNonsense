@@ -1,0 +1,226 @@
+BEGIN TRY
+	drop table #CBSAZips
+END TRY
+BEGIN CATCH
+END CATCH
+
+--Table to hold the HFM Code, Zip Code, CoName
+Declare @ZipCodes Table (
+	CoNo varchar(10),
+	ZipCode varchar(10),
+	CBSA varchar(100),
+	CoName varchar(100));
+
+Create table #CBSAZips (
+	CoNo varchar(10),
+	CoName varchar(100),
+	Reg_CBSA varchar(100),
+	VehRegZip varchar(10),
+	County varchar(100),
+	VehRegState varchar(2));
+
+Insert into @ZipCodes values ('L004','97504','MEDFORD OR','Medford CJD');
+Insert into @ZipCodes values ('L006','97501','MEDFORD OR','Medford Toyota');
+Insert into @ZipCodes values ('L009','97501','MEDFORD OR','Medford Honda');
+Insert into @ZipCodes values ('L011','79703','MIDLAND TX','Midland Chevrolet');
+Insert into @ZipCodes values ('L012','97501','MEDFORD OR','DiMar Volkswagen');
+Insert into @ZipCodes values ('L013','97501','MEDFORD OR','DiMar Nissan');
+Insert into @ZipCodes values ('L014','97501','MEDFORD OR','DiMar BMW');
+Insert into @ZipCodes values ('L015','97526','GRANTS PASS OR','Grants Pass CJD');
+Insert into @ZipCodes values ('L020','97603','KLAMATH FALLS OR','Klamath Falls CJD/Toyota');
+Insert into @ZipCodes values ('L023','93710','FRESNO CA','Fresno Ford/Mazda/Suzuki');
+Insert into @ZipCodes values ('L026','79762','ODESSA TX','Odessa Chevrolet');
+Insert into @ZipCodes values ('L027','93710','FRESNO CA','Fresno Nissan/Hyundai');
+Insert into @ZipCodes values ('L034','89511','RENO NV','Reno Volkswagen');
+Insert into @ZipCodes values ('L038','89502','RENO NV','Reno Subaru');
+Insert into @ZipCodes values ('L048','89502','RENO NV','Reno Hyundai');
+Insert into @ZipCodes values ('L051','99207','SPOKANE-Spokane Valley WA','Spokane Cadillac');
+Insert into @ZipCodes values ('L051','99207','SPOKANE-Spokane Valley WA','Spokane Chevrolet');
+Insert into @ZipCodes values ('L052','99207','SPOKANE-Spokane Valley WA','Spokane BMW');
+Insert into @ZipCodes values ('L053','99201','SPOKANE-Spokane Valley WA','Spokane Subaru');
+Insert into @ZipCodes values ('L056','99336','KENNEWICK-RICHLAND WA','Tri-Cities CJD');
+Insert into @ZipCodes values ('L057','96002','REDDING CA','Redding Chevrolet');
+Insert into @ZipCodes values ('L058','96002','REDDING CA','Redding Toyota');
+Insert into @ZipCodes values ('L059','97401','EUGENE OR','Eugene CJD/Fiat');
+Insert into @ZipCodes values ('L060','97401','EUGENE OR','Eugene Nissan');
+Insert into @ZipCodes values ('L061','97470','ROSEBURG OR','Roseburg Ford Lincoln');
+Insert into @ZipCodes values ('L063','97470','ROSEBURG OR','Roseburg CJD');
+Insert into @ZipCodes values ('L065','97477','EUGENE OR','Springfield Toyota');
+Insert into @ZipCodes values ('L072','83704','BOISE CITY ID','Boise Ford Lincoln');
+Insert into @ZipCodes values ('L099','83201','POCATELLO ID','Pocatello CJD/Hyundai');
+Insert into @ZipCodes values ('L100','83201','POCATELLO ID','Pocatello Honda');
+Insert into @ZipCodes values ('L106','99515','ANCHORAGE AK','Anchorage CJD');
+Insert into @ZipCodes values ('L110','98134','SEATTLE-TACOMA-BELLEVUE WA','Seattle BMW');
+Insert into @ZipCodes values ('L113','97045','PORTLAND-VANCOUVER-HILLSBORO OR-WA','Oregon City Subaru');
+Insert into @ZipCodes values ('L114','76903','SAN ANGELO TX','San Angelo Chevrolet');
+Insert into @ZipCodes values ('L116','76901','SAN ANGELO TX','San Angelo CJD');
+Insert into @ZipCodes values ('L117','76901','SAN ANGELO TX','San Angelo Honda');
+Insert into @ZipCodes values ('L121','79761','ODESSA TX','Odessa CJD');
+Insert into @ZipCodes values ('L124','79703','MIDLAND TX','Midland CJD');
+Insert into @ZipCodes values ('L125','79762','ODESSA TX','Odessa Hyundai');
+Insert into @ZipCodes values ('L127','99518','ANCHORAGE AK','Anchorage Hyundai');
+Insert into @ZipCodes values ('L131','83301','TWIN FALLS ID','Twin Falls Chevrolet');
+Insert into @ZipCodes values ('L134','59808','MISSOULA MT','Missoula CJD');
+Insert into @ZipCodes values ('L138','59102','BILLINGS MT','Billings CJD');
+Insert into @ZipCodes values ('L139','99019','SPOKANE-Spokane Valley WA','Spokane Mercedes');
+Insert into @ZipCodes values ('L140','95407','SANTA ROSA CA','Santa Rosa CJD');
+Insert into @ZipCodes values ('L143','99701','FAIRBANKS AK','Fairbanks Chevrolet');
+Insert into @ZipCodes values ('L145','89502','RENO NV','Reno CJ');
+Insert into @ZipCodes values ('L146','59601','HELENA MT','Helena Chevrolet');
+Insert into @ZipCodes values ('L148','99515','ANCHORAGE AK','Anchorage Chevrolet');
+Insert into @ZipCodes values ('L149','99654','ANCHORAGE AK','Wasilla Chevrolet');
+Insert into @ZipCodes values ('L150','79762','ODESSA TX','Odessa Toyota');
+Insert into @ZipCodes values ('L152','59405','GREAT FALLS MT','Great Falls CJD');
+Insert into @ZipCodes values ('L153','59405','GREAT FALLS MT','Great Falls Honda');
+Insert into @ZipCodes values ('L154','99501','ANCHORAGE AK','Anchorage BMW');
+Insert into @ZipCodes values ('L155','87507','SANTA FE NM','Santa Fe CJD');
+Insert into @ZipCodes values ('L157','59601','HELENA MT','Helena Chrysler Dodge');
+Insert into @ZipCodes values ('L159','95503','EUREKA-ARCATA-FORTUNA CA','Eureka CJD');
+Insert into @ZipCodes values ('L162','79606','ABILENE TX','Abilene Toyota');
+Insert into @ZipCodes values ('L163','79605','ABILENE TX','Abilene Honda');
+Insert into @ZipCodes values ('L164','79703','MIDLAND TX','Midland Honda');
+Insert into @ZipCodes values ('L169','78411','CORPUS CHRISTI TX','Corpus Christi Dodge');
+Insert into @ZipCodes values ('L172','83301','TWIN FALLS ID','Twin Falls CJD');
+Insert into @ZipCodes values ('L173','77802','COLLEGE STATION-BRYAN TX','Bryan CJD');
+Insert into @ZipCodes values ('L176','58201','GRAND FORKS ND-MN','Grand Forks Ford Lincoln');
+Insert into @ZipCodes values ('L178','58201','GRAND FORKS ND-MN','Grand Forks CJD');
+Insert into @ZipCodes values ('L179','58201','GRAND FORKS ND-MN','Grand Forks Toyota');
+Insert into @ZipCodes values ('L180','50322','DES MOINES-WEST DES MOINES IA','Des Moines BMW/Mercedes/Sprinter');
+Insert into @ZipCodes values ('L183','93955','SALINAS CA','Monterey BMW');
+Insert into @ZipCodes values ('L184','93955','SALINAS CA','Monterey Porsche');
+Insert into @ZipCodes values ('L190','50010','AMES IA','Ames Honda/Nissan');
+Insert into @ZipCodes values ('L192','50131','DES MOINES-WEST DES MOINES IA','Des Moines VW/Audi');
+Insert into @ZipCodes values ('L195','50131','DES MOINES-WEST DES MOINES IA','Des Moines Acura');
+Insert into @ZipCodes values ('L215','99503','ANCHORAGE AK','Anchorage Kia');
+Insert into @ZipCodes values ('L218','97701','BEND-Redmond OR','Bend Chevrolet Cadillac');
+Insert into @ZipCodes values ('L219','97701','BEND-Redmond OR','Bend Honda');
+Insert into @ZipCodes values ('L220','59102','BILLINGS MT','Billings Toyota');
+Insert into @ZipCodes values ('L222','97070','PORTLAND-VANCOUVER-HILLSBORO OR-WA','Wilsonville Mercedes');
+Insert into @ZipCodes values ('L223','97201','PORTLAND-VANCOUVER-HILLSBORO OR-WA','Portland Mercedes/Smart');
+Insert into @ZipCodes values ('L224','97201','PORTLAND-VANCOUVER-HILLSBORO OR-WA','Portland BMW');
+Insert into @ZipCodes values ('L225','97225','PORTLAND-VANCOUVER-HILLSBORO OR-WA','Portland Mini');
+Insert into @ZipCodes values ('L227','97603','KLAMATH FALLS OR','Klamath Falls Ford');
+Insert into @ZipCodes values ('L228','93710','FRESNO CA','Fresno Subaru/Mitsubishi');
+Insert into @ZipCodes values ('L230','97225','PORTLAND-VANCOUVER-HILLSBORO OR-WA','Beaverton Mercedes');
+Insert into @ZipCodes values ('L232','98226','BELLINGHAM WA','Bellingham Chevrolet');
+Insert into @ZipCodes values ('L233','88011','LAS CRUCES NM','Las Cruces Dodge');
+Insert into @ZipCodes values ('L236','76541','KILLEEN-TEMPLE TX','Killeen Chevrolet');
+Insert into @ZipCodes values ('L237','59804','MISSOULA MT','Missoula Toyota Scion');
+Insert into @ZipCodes values ('L240','97301','SALEM OR','Salem BMW');
+Insert into @ZipCodes values ('L241','97301','SALEM OR','Salem VW');
+Insert into @ZipCodes values ('L242','97301','SALEM OR','Salem Honda');
+Insert into @ZipCodes values ('L244','95212','STOCKTON-LODI CA','Stockton Nissan Kia');
+Insert into @ZipCodes values ('L247','95240','Stockton-LODI CA','Lodi Toyota');
+Insert into @ZipCodes values ('L248','94597','San Francisco-Oakland-Hayward CA', 'Diablo Subaru'); 
+Insert into @ZipCodes values ('L249','96732','Kahului-Wailuku-Lahaina HI','Island Honda');
+Insert into @ZipCodes values ('L253','96805','Urban Honolulu HI','Honolulu Buick GMC Cadillac');
+Insert into @ZipCodes values ('L254','96805','Urban Honolulu HI','Honolulu Volkswagen');
+Insert into @ZipCodes values ('L252','99654','ANCHORAGE AK','Wasilla CJD');
+Insert into @ZipCodes values ('L256','78411','CORPUS CHRISTI TX','Corpus Christi Ford Lincoln');
+Insert into @ZipCodes values ('L257','97232','PORTLAND-VANCOUVER-HILLSBORO OR-WA','Portland Cadillac');
+Insert into @ZipCodes values ('L258','97225','PORTLAND-VANCOUVER-HILLSBORO OR-WA', 'Beaverton Buick GMC');
+Insert into @ZipCodes values ('L259','93612','FRESNO CA','Clovis Nissan');
+Insert into @ZipCodes values ('L262','77034','Houston-The Woodlands-Sugar Land TX', 'Clearlake Subaru');
+Insert into @ZipCodes values ('L267','59804','MISSOULA MT','Missoula Ford');
+Insert into @ZipCodes values ('L272','96805','Urban Honolulu HI','Honolulu Acura');
+Insert into @ZipCodes values ('L268','59401','Great Falls MT','Great Falls GMC Buick Subaru Hyundai');
+Insert into @ZipCodes values ('L273','94520','San Francisco-Oakland-Hayward CA','Concord CJD Fiat');
+Insert into @ZipCodes values ('L275','99218','SPOKANE-Spokane Valley WA','Spokane CJD Alfa Fiat');
+
+--DCH CA
+Insert into @ZipCodes values ('L801','92591','Riverside-San Bernardino-Ontario CA','DCH Acura of Temecula');
+Insert into @ZipCodes values ('L802','92782','Los Angeles-Long Beach-Anaheim CA','DCH Tustin Acura');
+Insert into @ZipCodes values ('L803','92591','Riverside-San Bernardino-Ontario CA','DCH CJD of Temecula');
+Insert into @ZipCodes values ('L804','93036','Oxnard-Thousand Oaks-Ventura CA','DCH Lexus of Oxnard');
+Insert into @ZipCodes values ('L805','93105','Santa Maria-Santa Barbara CA','DCH Lexus of Santa Barbara');
+Insert into @ZipCodes values ('L806','93036','Oxnard-Thousand Oaks-Ventura CA','DCH Audi Oxnard');
+Insert into @ZipCodes values ('L807','92591','Riverside-San Bernardino-Ontario CA','DCH Kia of Temecula');
+Insert into @ZipCodes values ('L808','90249','Los Angeles-Long Beach-Anaheim CA','DCH Gardena Honda');
+Insert into @ZipCodes values ('L809','93036','Oxnard-Thousand Oaks-Ventura CA','DCH HOnda of Oxnard');
+Insert into @ZipCodes values ('L810','92120','San Diego-Carlsbad CA','DCH Honda of Mission Valley');
+Insert into @ZipCodes values ('L811','92591','Riverside-San Bernardino-Ontario CA','DCH Honda of Temecula');
+Insert into @ZipCodes values ('L812','93036','Oxnard-Thousand Oaks-Ventura CA','DCH Toyota of Oxnard');
+Insert into @ZipCodes values ('L813','93065','Oxnard-Thousand Oaks-Ventura CA','DCH Toyota of Simi Valley');
+Insert into @ZipCodes values ('L814','90505','Los Angeles-Long Beach-Anaheim CA','DCH Toyota of Torrence');
+Insert into @ZipCodes values ('L739','92504','Riverside-San Bernardino-Ontario CA' ,'DCH Riverside Subaru');
+
+--DCH NY
+Insert into @ZipCodes values ('L815','10954','New York-Newark-Jersey City NY-NJ-PA','DCH Honda of Nanuet');
+Insert into @ZipCodes values ('L816','10543','New York-Newark-Jersey City NY-NJ-PA','DCH Toyota City Mamaroneck');
+Insert into @ZipCodes values ('L817','12590','New York-Newark-Jersey City NY-NJ-PA','DCH Wappingers Falls Toyota');
+Insert into @ZipCodes values ('L818','10543','New York-Newark-Jersey City NY-NJ-PA','DCH Scion Ciy Mamaroneck');
+
+--DCH NJ
+Insert into @ZipCodes values ('L819','07044','New York-Newark-Jersey City NY-NJ-PA','DCH Montclair Acura');
+Insert into @ZipCodes values ('L820','07040','New York-Newark-Jersey City NY-NJ-PA','DCH Millburn Audi');
+Insert into @ZipCodes values ('L821','07003','New York-Newark-Jersey City NY-NJ-PA','BMW of Bloomfield');
+Insert into @ZipCodes values ('L822','07728','New York-Newark-Jersey City NY-NJ-PA','BMW of Freehold');
+Insert into @ZipCodes values ('L823','08857','New York-Newark-Jersey City NY-NJ-PA','DCH Academy Honda');
+Insert into @ZipCodes values ('L824','07724','New York-Newark-Jersey City NY-NJ-PA','DCH Kay Honda');
+Insert into @ZipCodes values ('L825','07652','New York-Newark-Jersey City NY-NJ-PA','DCH Paramus Honda');
+Insert into @ZipCodes values ('L826','07728','New York-Newark-Jersey City NY-NJ-PA','DCH Freehold Nissan');
+Insert into @ZipCodes values ('L827','08902','New York-Newark-Jersey City NY-NJ-PA','DCH Brunswick Scion');
+Insert into @ZipCodes values ('L828','07728','New York-Newark-Jersey City NY-NJ-PA','DCH Freehold Scion');
+Insert into @ZipCodes values ('L829','08902','New York-Newark-Jersey City NY-NJ-PA','DCH Brunswick Toyota');
+Insert into @ZipCodes values ('L830','07728','New York-Newark-Jersey City NY-NJ-PA','DCH Freehold Toyota');
+
+--DCH MA
+Insert into @ZipCodes values ('L738','01757','Worcester MA-CT', 'DCH Milford Toyota');
+
+
+Declare @ReportData Table (
+  CoNo varchar(10),
+  CoName varchar(100), 
+  Reg_CBSA varchar(100),  
+  [Dec2015] numeric(19,0), 
+  [Nov2015] numeric(19,0), 
+  [Oct2015] numeric(19,0), 
+  [Sep2015] numeric(19,0),    
+  [YTD-Dec2015] numeric(19,0), 
+  [YTD-Dec2014] numeric(19,0),
+  [FY-2014] numeric(19,0),
+  [FY-2013] numeric(19,0), 
+  [FY-2012] numeric(19,0), 
+  [FY-2011] numeric(19,0), 
+  [FY-2010] numeric(19,0), 
+  [FY-2009] numeric(19,0), 
+  [FY-2008] numeric(19,0),
+  [FY-2007] numeric(19,0),
+  [FY-2006] numeric(19,0) 
+); 
+
+--All Data
+Insert into @ReportData
+Select z.CoNo, z.CoName, z.CBSA,
+	sum(Case When dpd.Date between  '12/1/15' and  '12/31/15' then PolkCount else 0 end ),  
+	sum(Case When dpd.Date between  '11/1/15' and  '11/30/15' then PolkCount else 0 end ),  
+	sum(Case When dpd.Date between  '10/1/15' and  '10/31/15' then PolkCount else 0 end ),  
+	sum(Case When dpd.Date between  '9/1/15' and   '9/30/15' then PolkCount else 0 end ),  
+
+	sum(Case When dpd.Date between '01/01/15' and  '12/31/15' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/01/14' and  '12/31/14' then PolkCount else 0 end ),
+
+	sum(Case When dpd.Date between '01/1/14' and '12/31/14' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/1/13' and '12/31/13' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/1/12' and '12/31/12' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/1/11' and '12/31/11' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/1/10' and '12/31/10' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/1/09' and '12/31/09' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/1/08' and '12/31/08' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/1/07' and '12/31/07' then PolkCount else 0 end ),
+	sum(Case When dpd.Date between '01/1/06' and '12/31/06' then PolkCount else 0 end )  
+From [Polk_Prod].[dbo].[Fact_Polk] fp
+	join [Polk_Prod].[dbo].[Dim_Polk_Date] dpd
+		on fp.[Date_Key]  = dpd.[Date_Key]
+	join [Polk_Prod].[dbo].[Dim_Polk_Veh_Reg] reg
+		on fp.[Veh_Reg_Key] = reg.[Veh_Reg_Key]
+	join [Polk_Prod].[dbo].[Dim_Polk_Vehicle] veh
+		on fp.[Vehicle_Key] = veh.[Vehicle_Key]
+	join @ZipCodes z
+		on reg.[Reg_CBSA] = z.CBSA
+Where veh.New_Used = 'N' and [Fleet_Flag]  = 0 -- New and Used
+Group by  z.CoNo, z.CoName, z.CBSA
+
+Select * from @ReportData order by CoNo;
+
+

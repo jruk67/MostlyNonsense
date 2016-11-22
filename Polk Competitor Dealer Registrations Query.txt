@@ -1,0 +1,16 @@
+SELECT dr.[Dealer_Name], dr.[Dealer_Address], dr.Dealer_City, dr.[Dealer_County], ds.[State_Name], dr.[Dealer_Zip], dr.Dealer_CBSA 
+FROM [Polk_Prod].[dbo].[Fact_Polk] AS fp
+JOIN [Polk_Prod].[dbo].[Dim_Polk_Dlr_Reg] AS dr
+ON fp.[Dlr_Reg_Key] = dr.[Dlr_Reg_Key]
+JOIN [Polk_Prod].[dbo].[Dim_Polk_Veh_Reg] AS vr
+ON fp.[Veh_Reg_Key] = vr.Veh_Reg_Key
+JOIN [Polk_Prod].[dbo].[Dim_Polk_Vehicle] AS dv
+ON fp.[Vehicle_Key] = dv.[Vehicle_Key]
+JOIN [Polk_Prod].[dbo].[Dim_Polk_Date] AS dd
+ON fp.[Date_Key] = dd.[Date_Key]
+JOIN [DW_Prod].[dbo].[dim_States] AS ds
+ON dr.[Dealer_State] = ds.[State_Code] 
+WHERE dd.[Date] BETWEEN '10/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%Lithia%')
+OR dd.[Date] BETWEEN '10/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%Penske%')
+OR dd.[Date] BETWEEN '10/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%Carmax%')
+OR dd.[Date] BETWEEN '10/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%AutoNation%') 

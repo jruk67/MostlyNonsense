@@ -1,0 +1,16 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT [Company_Name]
+      ,[MasterDate]
+      ,SUM([Total_Deal_Gross]) AS "Sales Profit"
+      ,SUM([Total_Vehicle_Cost]) AS "Total Sales"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE (([MasterDate] between '1/1/2014' and '7/22/2014') AND ([UWFlag]='N') AND ([SaleCat]='Retail'))
+GROUP BY [Company_Name]
+        ,[MasterDate]
+        
+	

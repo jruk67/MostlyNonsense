@@ -1,0 +1,27 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+
+<<Sales Table>>
+
+SELECT DISTINCT [CoNo]
+      ,[Company_Name] AS "Store Name"
+      ,SUM([Count]) AS "Total Volume"
+      ,SUM([Total_Deal_Gross]) AS "Total Margin"
+      ,SUM([Total_Vehicle_Sale_Price]) AS "Total Sales"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE (([MasterDate] between '1/1/2015' and '12/31/2015') AND ([UWFlag]='N') AND ([SaleCat]='Retail'))
+GROUP BY [CoNo],[Company_Name]
+
+<<Inventory Table>>
+
+SELECT DISTINCT [CoNo]
+      ,[Name] AS "Store Name"
+      ,SUM([Cnt]) AS "Total Volume"
+      ,SUM([Tot Bal]) AS "Total Balance"
+  FROM [DW_Prod].[lithia].[vw_Vehicle_Inventory_Current]
+  WHERE ([Description]='Retail') AND ([Status]='Available')
+  GROUP BY [CoNo],[Name]

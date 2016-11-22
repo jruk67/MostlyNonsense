@@ -1,0 +1,93 @@
+>>To get total number of deals
+
+SELECT DISTINCT *
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N' AND LEN ([FIMgrId]) > 3 AND [SaleDate] > '1/1/2015'
+ORDER BY [DealNum] ASC
+
+>>To get total number of new deals by pay type
+
+SELECT [Company_Name] AS "Store"
+      ,SUM (CASE WHEN [PayType] = 'Cash' THEN 1 ELSE 0 END) AS "Cash"
+      ,SUM (CASE WHEN [PayType] IN ('Finance','Lease') THEN 1 ELSE 0 END) AS "Finance"
+	  ,SUM (CASE WHEN [NewUsed] = 'New Vehicle' THEN 1 ELSE 0 END) AS "New"
+	  ,SUM (CASE WHEN [NewUsed] = 'Used Vehicle' THEN 1 ELSE 0 END) AS "Used"
+	  ,COUNT ([DealNum]) AS "Total"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [NewUsed] = 'New Vehicle' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N' AND [SaleCat] = 'Retail' AND [InvSource] IN ('Dealer Trade','Manufacturer','New Retail')
+GROUP BY [Company_Name]
+
+>>To get total number of used deals by pay type
+
+SELECT [Company_Name] AS "Store"
+      ,SUM (CASE WHEN [PayType] = 'Cash' THEN 1 ELSE 0 END) AS "Cash"
+      ,SUM (CASE WHEN [PayType] IN ('Finance','Lease') THEN 1 ELSE 0 END) AS "Finance"
+	  ,SUM (CASE WHEN [NewUsed] = 'New Vehicle' THEN 1 ELSE 0 END) AS "New"
+	  ,SUM (CASE WHEN [NewUsed] = 'Used Vehicle' THEN 1 ELSE 0 END) AS "Used"
+	  ,COUNT ([DealNum]) AS "Total"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [NewUsed] = 'Used Vehicle' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N' AND [InvSource] IN ('Auction','Tradein','Unknown')
+GROUP BY [Company_Name]
+
+>>To get total number of back-end products sold on new vehicles
+
+SELECT [Company_Name] AS "Store"
+      ,SUM ([Extended_Service_Contract_Count]) AS "ESC"
+	  ,SUM ([Lifetime_Oil_Count]) AS "OIL"
+	  ,SUM ([Preservation_Product_Count]) AS "COATS"
+	  ,SUM ([Security_System_Count]) AS "SECURITY"
+	  ,SUM ([Gap_Insurance_Count]) AS "GAP"
+	  ,SUM ([Maintenance_Product_Count] + [Tire_Wheel_Pkg_Count]) AS "MISC"
+	  ,SUM ([LA_And_H_Count]) AS "LA&H/LMU"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N'
+GROUP BY [Company_Name]
+
+>>To get total income of back-end products sold on new vehicles
+
+SELECT [Company_Name] AS "Store"
+      ,SUM ([Extended_Service_Contract_Gross]) AS "ESC"
+	  ,SUM ([Lifetime_Oil_Gross]) AS "OIL"
+	  ,SUM ([Preservation_Product_Gross]) AS "COATS"
+	  ,SUM ([Security_System_Gross]) AS "SECURITY"
+	  ,SUM ([Gap_Insurance_Gross]) AS "GAP"
+	  ,SUM ([Maintenance_Product_Gross] + [Tire_Wheel_Pkg_Count]) AS "MISC"
+	  ,SUM ([LA_And_H_Gross]) AS "LA&H/LMU"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N' AND [InvSource] <> 'New Retail'
+GROUP BY [Company_Name]
+
+>>To get total number of cash and finance deals
+
+SELECT [Company_Name] AS "Store"
+      ,SUM (CASE WHEN [PayType] = 'Cash' THEN 1 ELSE 0 END) AS "Cash"
+	  ,SUM (CASE WHEN [PayType] = 'Finance' THEN 1 ELSE 0 END) AS "Finance"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N' AND [SaleCat] = 'Retail' AND [InvSource] <> 'Lithia Transfer'
+GROUP BY [Company_Name]
+
+>>To get total cash & finance deal income
+
+SELECT [Company_Name] AS "Store"
+      ,SUM (CASE WHEN [PayType] = 'Cash' THEN [Back_End_Gross] ELSE 0 END) AS "Cash"
+	  ,SUM (CASE WHEN [PayType] = 'Finance' THEN [Back_End_Gross] ELSE 0 END) AS "Finance"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N' AND [SaleCat] = 'Retail'
+GROUP BY [Company_Name]
+
+>>To get total number of lease deals
+
+SELECT [Company_Name] AS "Store"
+      ,SUM (CASE WHEN [PayType] = 'Lease' THEN 1 ELSE 0 END) AS "Lease"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N' AND [SaleCat] = 'Retail' AND [InvSource] <> 'Unknown'
+GROUP BY [Company_Name]
+
+>>To get lease deal income
+
+SELECT [Company_Name] AS "Store"
+      ,SUM (CASE WHEN [PayType] = 'Lease' THEN [Back_End_Gross] ELSE 0 END) AS "Lease"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE [CoNo] = '29' AND [ContractDate] BETWEEN '1/1/2016' AND '1/31/2016' AND [SaleStatus] = 'Finalized' AND [UWFlag] = 'N' AND [SaleCat] = 'Retail'
+GROUP BY [Company_Name]
+

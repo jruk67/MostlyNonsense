@@ -1,0 +1,28 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT [CoNo]
+      ,[Company_Name]
+      ,[MasterDate]
+      ,[UWFlag]
+      ,[Count]
+      ,[NewUsed]
+      ,[SaleCat]
+      ,[Front_End_Gross]
+      ,[Back_End_Gross]
+      ,SUM([Total_Vehicle_Cost]) AS "Total Sales"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE (([MasterDate] between '7/1/2015' and '12/31/2015') AND ([UWFlag]='N') AND ([SaleCat]='Retail'))
+GROUP BY [CoNo]
+        ,[Company_Name]
+        ,[MasterDate]
+        ,[UWFlag]
+        ,[Count]
+        ,[NewUsed]
+        ,[SaleCat]
+        ,[Front_End_Gross]
+        ,[Back_End_Gross]
+	

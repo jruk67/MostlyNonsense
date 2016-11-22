@@ -1,0 +1,14 @@
+/*SELECT *
+FROM orders
+WHERE rownum < 100*/
+
+SELECT w.TRANSIT_GROUP as "Market",
+       w.WAVE as "Wave",
+       w.Date_Created as "Date Created"
+       o.POOL-PT as "Pool Point #"
+       o.STORE as "Store #"
+       o.EXPLODED_UNIT as "Total Units Picked (exp)"
+FROM wave as w
+JOIN orders as o
+on w.Date_Created = o.Date_Created
+WHERE w.Date_Created BETWEEN 4/1/2016 AND 4/5/2016

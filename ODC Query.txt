@@ -1,0 +1,24 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT [CoNo]
+      ,[CheckNum]
+      ,[Address]
+      ,[CheckAmt]
+      ,[CheckDate]
+      ,[CheckType]
+      ,[City]
+      ,[Comments]
+      ,[Invoice]
+      ,[Payee]
+      ,[PayeeName]
+      ,[PayeeName2]
+      ,[State]
+      ,[VoidDate]
+      ,[voidType]
+      ,[ZipCode]
+  FROM [Dev].[dbo].[acctg_ODC]
+  WHERE ([CheckDate] between '1/1/2015' and '7/20/2015') AND ([CheckAmt]<'50000') OR ([CheckDate] between '1/1/2015' and '7/20/2015') AND ([voidType]='')

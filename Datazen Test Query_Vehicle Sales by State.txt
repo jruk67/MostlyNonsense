@@ -1,0 +1,12 @@
+SELECT DISTINCT (s.[CoNo]) AS  "Store #"
+      ,(s.[Company_Name]) AS "Store Name"
+      ,SUM (s.[Total_Vehicle_Sale_Price]) AS "Total Sales Revenue"
+      ,SUM (s.[Total_Deal_Gross]) AS "Total Sales Gross"  
+      ,SUM (s.[Count]) AS "Total Sales Volume"
+      ,(c.[State_Name]) AS "State" 
+      ,(s.[NewUsed]) AS "Sale Type"  
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales] AS s
+JOIN [DW_Prod].[dbo].[Dim_Company] AS c
+ON s.[CoNo] = c.[Company_Number]
+WHERE (s.[SaleStatus] = 'Finalized') AND (s.[UWFlag] = 'N') AND (s.[CoNo] NOT IN ('12','13','14','99','100')) AND s.[SaleDate] BETWEEN '@StartDate' and '@EndDate'
+GROUP BY (s.[CoNo]),(s.[Company_Name]),(s.[NewUsed]),(c.[State_Name])

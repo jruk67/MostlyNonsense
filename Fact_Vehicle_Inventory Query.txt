@@ -1,0 +1,6 @@
+SELECT DISTINCT [Company_Name], SUM ([Balance]) as "Total $"
+FROM [DW_Prod].[dbo].[Fact_Vehicle_Inventory2] as f
+JOIN [DW_Prod].[dbo].[Dim_Company] as c 
+on f.Company_Key = c.Company_Key 
+WHERE [Date_Of_Record_Key] BETWEEN '20150901' AND '20150930' AND [Company_Number] NOT IN ('12','13','14')
+GROUP BY [Company_Name]

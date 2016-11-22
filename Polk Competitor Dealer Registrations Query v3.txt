@@ -1,0 +1,20 @@
+	SELECT TOP 100 ds.[State_Name]
+		  ,dd.[Date] 
+		  ,CASE WHEN dr.[Dealer_Name] LIKE ('%Lithia%') THEN COUNT (fp.[VIN]) ELSE 0 END AS "Lithia"
+		  ,CASE WHEN dr.[Dealer_Name] LIKE ('%Penske%') THEN COUNT (fp.[VIN]) ELSE 0 END AS "Penske"
+		  ,CASE WHEN dr.[Dealer_Name] LIKE ('%CarMax%') THEN COUNT (fp.[VIN]) ELSE 0 END AS "CarMax"
+		  ,CASE WHEN dr.[Dealer_Name] LIKE ('%AutoNation%') THEN COUNT (fp.[VIN]) ELSE 0 END AS "AutoNation" 
+		  ,dr.[Dealer_Address] AS "Address", dr.[Dealer_City] AS "City", dr.[Dealer_State] AS "State", dr.[Dealer_Zip] AS "ZIP" 
+	FROM [Polk_Prod].[dbo].[Fact_Polk] AS fp
+	JOIN [Polk_Prod].[dbo].[Dim_Polk_Dlr_Reg] AS dr		
+	ON fp.[Dlr_Reg_Key] = dr.[Dlr_Reg_Key]
+	JOIN [Polk_Prod].[dbo].[Dim_Polk_Date] AS dd
+	ON fp.[Date_Key] = dd.[Date_Key]
+	JOIN [DW_Prod].[dbo].[dim_States] AS ds
+	ON dr.[Dealer_State] = ds.[State_Code] 
+	WHERE dd.[Date] BETWEEN '12/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%Lithia%') AND ds.[State_Name] IN ('Alaska','Hawaii','Washington','Oregon','California','Nevada','New Mexico','Texas','Idaho','Montana','North Dakota','Iowa')
+	OR dd.[Date] BETWEEN '12/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%Penske%') AND ds.[State_Name] IN ('Alaska','Hawaii','Washington','Oregon','California','Nevada','New Mexico','Texas','Idaho','Montana','North Dakota','Iowa')
+	OR dd.[Date] BETWEEN '12/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%CarMax%') AND ds.[State_Name] IN ('Alaska','Hawaii','Washington','Oregon','California','Nevada','New Mexico','Texas','Idaho','Montana','North Dakota','Iowa')
+	OR dd.[Date] BETWEEN '12/1/2015' AND '12/31/2015' AND dr.[Dealer_Name] LIKE ('%AutoNation%') AND ds.[State_Name] IN ('Alaska','Hawaii','Washington','Oregon','California','Nevada','New Mexico','Texas','Idaho','Montana','North Dakota','Iowa')
+	GROUP BY ds.[State_Name], dd.[Date], dr.[Dealer_Name], dr.[Dealer_Address], dr.[Dealer_City], dr.[Dealer_State], dr.[Dealer_Zip] 
+	ORDER BY COUNT (fp.[VIN]) DESC

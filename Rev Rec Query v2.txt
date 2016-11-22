@@ -1,0 +1,25 @@
+SELECT s.[CoNo]
+      ,s.[Company_Name]
+      ,g.[AcctgDate]
+      ,s.[NewUsed]
+      ,g.[Jnl]
+      ,g.[Reference]
+      ,g.[Control]
+      ,g.[Amt]
+,CASE WHEN f.[FormID] IN ('3','553','3776*1','553B','3L','553A','553F','553G','553SP','AFSL','AFCU','AFSLW','AHFL','AHFL1','AHFLL','AHFLR','AHFLZ','AHFR','AHFRD','BMWL','BMWL1','BMWL','BMWR','BO','BOH','BSC','CFR','CMBR','DACU','ECCA1','FMCL','FMCLM','FMCR','GMAL1','GMALI','GMAR','GMCU','GRC','GRCA','GRCF','HCUR','HML','LL','MACL','MBCL','MFL','MINIL','NMAI','NMAL','NMAR','NMCL','NML','NMLI','SAFCU','AL','ECOR1','BOWL','CURT','GRCAB','OADA','PFSI','PFSL','RIC','SACL','SMFL','TMCL','TMCLO','TMCR','USBL','VCIL','Z553','ZGRC','CUR','GRC2','GMAL','MFCU','SMART','ZMBCL','CMBL','CAC','553T','RICN','BMWLX','TMCL2','VFCU','WFBL','CCL','MBCL1','AHFRD','SMAR1','MINIR','ACFLX','SACLX','GRCV','ACFL','BMWRI','VCIL','GMFL','2550A','17293*','24205*','35459*') THEN CAST (f.[FormID] AS VARCHAR (10)) ELSE '' END AS "Form ID"
+,CASE WHEN f.[FormID] IN ('3','553','3776*1','553B','3L','553A','553F','553G','553SP','AFSL','AFCU','AFSLW','AHFL','AHFL1','AHFLL','AHFLR','AHFLZ','AHFR','AHFRD','BMWL','BMWL1','BMWL','BMWR','BO','BOH','BSC','CFR','CMBR','DACU','ECCA1','FMCL','FMCLM','FMCR','GMAL1','GMALI','GMAR','GMCU','GRC','GRCA','GRCF','HCUR','HML','LL','MACL','MBCL','MFL','MINIL','NMAI','NMAL','NMAR','NMCL','NML','NMLI','SAFCU','AL','ECOR1','BOWL','CURT','GRCAB','OADA','PFSI','PFSL','RIC','SACL','SMFL','TMCL','TMCLO','TMCR','USBL','VCIL','Z553','ZGRC','CUR','GRC2','GMAL','MFCU','SMART','ZMBCL','CMBL','CAC','553T','RICN','BMWLX','TMCL2','VFCU','WFBL','CCL','MBCL1','AHFRD','SMAR1','MINIR','ACFLX','SACLX','GRCV','ACFL','BMWRI','VCIL','GMFL','2550A','17293*','24205*','35459*') THEN CAST (MAX (f.[Print_Date]) AS VARCHAR (10)) ELSE '' END AS "Last Contract Print Date"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales] AS s
+JOIN [DW_Prod].[lithia].[vw_GL_Detail] AS g
+ON s.[DealNum] = g.[Control]
+JOIN [DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History] AS f
+ON s.[DealNum] = f.[DealNumber]
+WHERE s.[CoNo] = '6' AND g.[AcctgDate] BETWEEN '12/1/2015' AND '12/31/15' AND f.[FormID] IN ('3','553','3776*1','553B','3L','553A','553F','553G','553SP','AFSL','AFCU','AFSLW','AHFL','AHFL1','AHFLL','AHFLR','AHFLZ','AHFR','AHFRD','BMWL','BMWL1','BMWL','BMWR','BO','BOH','BSC','CFR','CMBR','DACU','ECCA1','FMCL','FMCLM','FMCR','GMAL1','GMALI','GMAR','GMCU','GRC','GRCA','GRCF','HCUR','HML','LL','MACL','MBCL','MFL','MINIL','NMAI','NMAL','NMAR','NMCL','NML','NMLI','SAFCU','AL','ECOR1','BOWL','CURT','GRCAB','OADA','PFSI','PFSL','RIC','SACL','SMFL','TMCL','TMCLO','TMCR','USBL','VCIL','Z553','ZGRC','CUR','GRC2','GMAL','MFCU','SMART','ZMBCL','CMBL','CAC','553T','RICN','BMWLX','TMCL2','VFCU','WFBL','CCL','MBCL1','AHFRD','SMAR1','MINIR','ACFLX','SACLX','GRCV','ACFL','BMWRI','VCIL','GMFL','2550A','17293*','24205*','35459*')
+GROUP BY s.[CoNo]
+      ,s.[Company_Name]
+      ,g.[AcctgDate]
+      ,s.[NewUsed]
+      ,g.[Jnl]
+      ,g.[Reference]
+      ,g.[Control]
+      ,g.[Amt]
+      ,f.[FormID]

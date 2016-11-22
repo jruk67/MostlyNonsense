@@ -1,0 +1,17 @@
+SELECT *
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE ([CoNo] = ? 
+   OR  [Company_Name] = ?)
+  AND ([MasterDate] BETWEEN ? AND ?)
+   OR  [DealNum] = ?
+   OR  [Stock] = ?
+   OR  [VIN] = ?
+   OR  [Make] = ?
+   OR  [Model] = ?
+   OR  [MSRP] > ?
+   OR  [Sp1] = ?
+   OR  [FIMgr] = ?
+   OR  [DeskMgr] = ?
+   OR  [SlsMgr] = ?
+   OR  [Customer] = ?
+   OR  [PayType] = ?

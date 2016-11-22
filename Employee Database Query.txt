@@ -1,0 +1,17 @@
+Connection string:
+
+Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=True;Data Source=NTQUIMBY;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=JAMES-RYAN;Use Encryption for Data=False;Tag with column collation when possible=False;Initial Catalog=Dev
+
+SQL script:
+
+SELECT [FirstName] + ' ' + [LastName] AS Name
+      ,[JobcodeDesc] AS Job Title
+      ,[DeptDesc] AS Department
+      ,[EmployeeStat]
+      ,[LocCity] AS City
+      ,[State]
+      ,[HireDate] AS Hire Date
+      ,[PhoneWork] AS Phone
+      ,[EMailWork] AS Email
+  FROM [Dev].[dbo].[dw_Employee]
+  WHERE ([EmployeeStat] = 'A')

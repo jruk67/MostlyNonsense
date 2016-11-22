@@ -1,0 +1,10 @@
+C219 - Passwords
+C220 - New Hires
+C221.1 - Application Layer Super Users 
+C221.2 - Super User - User Provisioning
+C222 - Direct Access to Modify Key Tables
+C223 - Unique User-IDs
+C224 - Physical Access
+C227 - Change Management 
+C232 - Daily Backup
+C233 - Disaster Recovery

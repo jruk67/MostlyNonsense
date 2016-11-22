@@ -1,0 +1,14 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT COUNT (DISTINCT [DealNum]) AS "Count of Vehicles Sold"
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 12) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 13) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 14) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 16) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 18) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 21) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 22) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 168) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 171) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 255) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 260) AND ([SaleDate] between '6/1/2015' and '6/30/2015') AND ([CoNo] <> 261)
+
+
+
+
+

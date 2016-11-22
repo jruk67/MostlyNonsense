@@ -1,0 +1,19 @@
+SELECT c.[Company_Name], MIN (t.[Balance_Forward]) + SUM (t.[Month_Balance]) AS "Total $" 
+FROM [DW_Prod].[dbo].[Dim_GL_Trial_Balance] AS t
+LEFT JOIN [DW_Prod].[dbo].[Dim_Company] AS c 
+ON t.[Company_Number] = c.[Company_Number]
+LEFT JOIN [DW_Prod].[dbo].[Dim_GL_Account] AS a
+ON t.[Account_Number] = a.[Account_Number] AND t.[Company_Number] = a.[Company_Number]
+WHERE (t.[FY_End_Date] = '12/31/2015') AND (t.[Account_Number]) BETWEEN '20000' AND '28000' AND LEN (t.[Account_Number]) = 5 AND (c.[Company_Number] < '700') AND (c.[Company_Number] NOT IN ('1','3','12','13','14','16','18','21','22','50','56','60','75','79','81','85','105','161','168','171','231','238','260','261','255','264','265','266','268','502','503','504') AND a.[Current_Record] = 'Y')
+OR (t.[FY_End_Date] = '12/31/2015') AND (t.[Account_Number] IN ('30900','30215','30230','30235','30240','30245','34520','34530','35540','34630','34640','34650')) AND LEN (t.[Account_Number]) = 5 AND (c.[Company_Number] < '700') AND (c.[Company_Number] NOT IN ('1','3','12','13','14','16','18','21','22','50','56','60','75','79','81','85','105','161','168','171','231','238','260','261','255','264','265','266','268','502','503','504') AND a.[Current_Record] = 'Y')
+GROUP BY c.[Company_Name]
+ORDER BY c.[Company_Name] ASC
+
+SELECT *
+FROM [DW_Prod].[dbo].[Dim_GL_Trial_Balance] AS t
+LEFT JOIN [DW_Prod].[dbo].[Dim_Company] AS c 
+ON t.[Company_Number] = c.[Company_Number]
+LEFT JOIN [DW_Prod].[dbo].[Dim_GL_Account] AS a
+ON t.[Account_Number] = a.[Account_Number] AND t.[Company_Number] = a.[Company_Number]
+WHERE (t.[FY_End_Date] = '12/31/2015') AND (t.[Account_Number]) BETWEEN '20000' AND '28000' AND LEN (t.[Account_Number]) = 5 AND (c.[Company_Number] < '700') AND (c.[Company_Number] NOT IN ('1','3','12','13','14','16','18','21','22','50','56','60','75','79','81','85','105','161','168','171','231','238','260','261','255','264','265','266','268','502','503','504') AND a.[Current_Record] = 'Y') AND (c.[Active_Flag] = 'Y')
+OR (t.[FY_End_Date] = '12/31/2015') AND (t.[Account_Number] IN ('30900','30215','30230','30235','30240','30245','34520','34530','35540','34630','34640','34650')) AND LEN (t.[Account_Number]) = 5 AND (c.[Company_Number] < '700') AND (c.[Company_Number] NOT IN ('1','3','12','13','14','16','18','21','22','50','56','60','75','79','81','85','105','161','168','171','231','238','260','261','255','264','265','266','268','502','503','504') AND a.[Current_Record] = 'Y') AND (c.[Active_Flag] = 'Y')

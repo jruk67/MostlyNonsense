@@ -1,0 +1,41 @@
+SELECT  dc.[State_Name] AS "State", dc.[Company_Name], (em.[First_Name] + ' ' + em.[Last_Name]) AS "Tech Name", COUNT (CASE WHEN fsd.[RO_Line_Number] = '1' THEN (dro.[RO_Number]) ELSE NULL END) AS " Count of Repair Orders", ROUND (SUM (fsd.[Hours_Sold]),0) AS "RO Hours Sold", SUM (fsd.[Labor_Sale]) AS "Labor Sale", SUM (fsd.[Parts_Sale]) AS "Parts Sale"
+FROM  [DW_Dev].[dbo].[Fact_Service_Detail] AS fsd
+JOIN  [DW_Dev].[dbo].[Dim_Company] AS dc
+ON dc.[Company_Key] = fsd.[Company_Key]
+JOIN [DW_Dev].[dbo].[Dim_Date] AS dd
+ON fsd.[Close_Date_Key] = dd.[Date_Key]
+JOIN  [DW_Dev].[dbo].[Dim_Service_Sale_Repair_Order] AS dro
+ON fsd.[Repair_Order_Key] = dro.[Repair_Order_Key]
+JOIN  [DW_Dev].[dbo].[Dim_Employee] AS em
+ON fsd.[Service_Advisor_Key] = em.[Employee_Key]
+WHERE  dd.[Date] BETWEEN '2/1/2016' AND '2/29/2016' AND dc.[Company_Number] > '20000'
+GROUP BY  dc.[State_Name], dc.[Company_Name], dc.[Service_Logon], dro.[Service_Logon], em.[First_Name], em.[Last_Name]
+ORDER BY  dc.[State_Name], dc.[Company_Name]
+
+SELECT  dc.[State_Name] AS "State", dc.[Company_Name], (em.[First_Name] + ' ' + em.[Last_Name]) AS "Tech Name", COUNT (dro.[RO_Number]) AS " Count of Repair Orders", ROUND (SUM (fsr.[Sold_Hours]),0) AS "RO Hours Sold", SUM (fsr.[Labor_Sale]) AS "Labor Sale", SUM (fsr.[Parts_Sale]) AS "Parts Sale"
+FROM  [DW_Dev].[dbo].[Fact_Service_RO] AS fsr
+JOIN  [DW_Dev].[dbo].[Dim_Company] AS dc
+ON dc.[Company_Key] = fsr.[Company_Key]
+JOIN [DW_Dev].[dbo].[Dim_Date] AS dd
+ON fsr.[Close_Date_Key] = dd.[Date_Key]
+JOIN  [DW_Dev].[dbo].[Dim_Service_Sale_Repair_Order] AS dro
+ON fsr.[Repair_Order_Key] = dro.[Repair_Order_Key]
+JOIN  [DW_Dev].[dbo].[Dim_Employee] AS em
+ON fsr.[Service_Advisor_Key] = em.[Employee_Key]
+WHERE  dd.[Date] BETWEEN '2/1/2016' AND '2/29/2016' AND dc.[Company_Number] > '20000'
+GROUP BY  dc.[State_Name], dc.[Company_Name], dc.[Service_Logon], dro.[Service_Logon], em.[First_Name], em.[Last_Name]
+ORDER BY  dc.[State_Name], dc.[Company_Name]
+
+SELECT  dc.[State_Name] AS "State", dc.[Company_Name], (em.[First_Name] + ' ' + em.[Last_Name]) AS "Tech Name", COUNT (CASE WHEN fst.[Line_Code] = 'A' THEN (fst.[Repair_Order_Key]) ELSE NULL END) AS " Count of Repair Orders", ROUND (SUM (fst.[Hours_Sold]),0) AS "RO Hours Sold", SUM (fst.[Labor_Sale]) AS "Labor Sale"
+FROM  [DW_Dev].[dbo].[Fact_Service_Tech_Hours] AS fst
+JOIN  [DW_Dev].[dbo].[Dim_Company] AS dc
+ON dc.[Company_Key] = fst.[Company_Key]
+JOIN [DW_Dev].[dbo].[Dim_Date] AS dd
+ON fst.[Close_Date_Key] = dd.[Date_Key]
+JOIN  [DW_Dev].[dbo].[Dim_Service_Sale_Repair_Order] AS dro
+ON fst.[Repair_Order_Key] = dro.[Repair_Order_Key]
+JOIN  [DW_Dev].[dbo].[Dim_Employee] AS em
+ON fst.[Service_Advisor_Key] = em.[Employee_Key]
+WHERE  dd.[Date] BETWEEN '2/1/2016' AND '2/29/2016' AND dc.[Company_Number] > '20000'
+GROUP BY  dc.[State_Name], dc.[Company_Name], dc.[Service_Logon], dro.[Service_Logon], em.[First_Name], em.[Last_Name]
+ORDER BY  dc.[State_Name], dc.[Company_Name]

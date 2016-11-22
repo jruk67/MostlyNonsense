@@ -1,0 +1,31 @@
+SELECT *
+FROM [DW_Prod].[lithia].[vw_GL_Detail]
+WHERE ([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '70050' AND '70520') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '70050' AND '70520')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '71180' AND '71980') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '71180' AND '71980')
+OR 
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '72000' AND '72355') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '72000' AND '72355')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '73060') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '73060')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '74000' AND '74955') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '74000' AND '74955')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '75000' AND '75980') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '75000' AND '75980')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '76000' AND '76300') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '76000' AND '76300')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '78120') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '78120')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '78140') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '78140')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '80000' AND '80660') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '80000' AND '80660')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '83000' AND '83060') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '83000' AND '83060')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '75000' AND '75980') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '75000' AND '75980')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '84000') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '84000')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '85000') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] = '85000')
+OR
+([Name] LIKE ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '90200' AND '90425') OR ([CoNo] = ? AND [AcctgDate] BETWEEN ? AND ? AND [AcctNum] BETWEEN '90200' AND '90425')

@@ -1,0 +1,22 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT       [CoNo]
+            ,[Name] AS "Store Name"
+            ,[AcctgDate] AS "Accounting Date"
+            ,[IC] AS "Input Code"
+            ,[Jnl] AS "Journal"
+            ,[Reference]
+            ,[Doc_Description]
+            ,[AcctNum] AS "Account #"
+            ,[Account_Description]
+            ,[Amt] AS "Amount"
+            ,[Control]
+            ,[Control2]
+            ,[Detail_Description]
+            ,[Posted] AS "Posting Date"
+FROM [DW_Prod].[lithia].[vw_GL_Detail]
+WHERE ([Void]='0') AND ([AcctgDate] between ? and ?) AND ([AcctNum]=?) 

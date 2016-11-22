@@ -1,0 +1,16 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT [CoNo]
+      ,[Name]
+      ,[AcctgDate]
+      ,[Jnl]
+      ,[AcctNum]
+      ,[Account_Description]
+      ,[Amt]
+      ,[Posted]
+FROM [DW_Prod].[lithia].[vw_GL_Detail]
+WHERE ([CoNo] = '1') AND ([Jnl] = '79') AND ([AcctgDate] between '1/1/2016' and '7/31/2016') AND ([AcctNum] = '20011') OR ([CoNo] = '16') AND ([Jnl] = '79') AND ([AcctgDate] between '1/1/2016' and '7/31/2016') AND ([AcctNum] = '20100') OR ([CoNo] = '18') AND ([Jnl] = '79') AND ([AcctgDate] between '1/1/2016' and '7/31/2016') AND ([AcctNum] = '20011') OR ([CoNo] = '79') AND ([Jnl] = '79') AND ([AcctgDate] between '1/1/2016' and '7/31/2016') AND ([AcctNum] = '20011') OR ([CoNo] = '22') AND ([Jnl] = '79') AND ([AcctgDate] between '1/1/2016' and '7/31/2016') AND ([AcctNum] = '20011')

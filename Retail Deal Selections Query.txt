@@ -1,0 +1,60 @@
+SELECT  s.[NewUsed] AS "Sale Type"
+       ,s.[PayType] AS "Finance Source" 
+       ,s.[DealNum] AS "Deal #"
+       ,s.[MasterDate] AS "GL Date"
+       ,s.[Total_Vehicle_Sale_Price] AS "Sale Amount"
+       ,p.[Print_Date]
+       ,COUNT DISTINCT (p.[DealNumber]) AS "# of Contracts Printed"
+       ,s.[Stock] AS "Stock #"
+       ,s.[Customer]
+       ,s.[Year] + ' ' + [Make] + ' ' + [Model] AS "Vehicle"
+       ,s.[FIMgr] AS "Fin. Mgr"
+       ,s.[DeskMgr] AS "Desk Mgr"
+       ,s.[Sp1] AS "Sales Person #1"
+       ,s.[Sp2] AS "Sales Person #2"       
+       ,s.[Company_Name]
+       ,s.[ContractDate]
+       ,s.[SaleDate]
+       ,s.[VIN]
+       ,s.[Factory_Rebate]
+       ,s.[Total_Amount_Financed]
+       ,s.[BuyRate]
+       ,s.[SellRate]
+       ,s.[Spread]
+       ,s.[Total_Deal_Gross]
+       ,s.[Vehicle_Sale_Price]
+       ,s.[Accessories_Sale_Price]
+       ,s.[TotTradeAllow]
+       ,s.[TotTradeACV]
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales] as s
+JOIN [DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History] as p
+ON s.[DealNum] = p.[DealNumber]
+WHERE (s.[Company_Name] LIKE ?) AND (s.[SaleDate] between ? and ?) AND (s.[SaleStatus]='Finalized') AND (s.[SaleCat]='Retail') 
+GROUP BY s.[NewUsed] 
+        ,s.[PayType] 
+        ,s.[DealNum] 
+        ,s.[MasterDate] 
+        ,s.[Total_Vehicle_Sale_Price] 
+        ,s.[Stock] 
+        ,s.[Customer]
+        ,s.[Year]
+        ,s.[Make]
+        ,s.[Model] 
+        ,s.[FIMgr]
+        ,s.[DeskMgr] 
+        ,s.[Sp1]
+        ,s.[Sp2]     
+        ,s.[Company_Name]
+        ,s.[ContractDate]
+        ,s.[SaleDate]
+        ,s.[VIN]
+        ,s.[Factory_Rebate]
+        ,s.[Total_Amount_Financed]
+        ,s.[BuyRate]
+        ,s.[SellRate]
+        ,s.[Spread]
+        ,s.[Total_Deal_Gross]
+        ,s.[Vehicle_Sale_Price]
+        ,s.[Accessories_Sale_Price]
+        ,s.[TotTradeAllow]
+        ,s.[TotTradeACV]

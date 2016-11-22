@@ -1,0 +1,71 @@
+<<<Schedule 41>>>
+
+SELECT [Control] AS "Vehicle"
+      ,MAX (DATEDIFF (DAY,[DOOSI],[Current_Month] + 30)) AS "Days"
+      ,[Control_Name] AS " Year/Make/Model"
+	  ,[VIN] AS "Serial"
+	  ,SUM (CASE WHEN [Acct] = '23200' THEN [Amt] ELSE '0' END) AS "23200"
+	  ,SUM (CASE WHEN [Acct] = '23210' THEN [Amt] ELSE '0' END) AS "23210"
+	  ,SUM (CASE WHEN [Acct] = '33000' THEN [Amt] ELSE '0' END) AS "33000"
+	  ,SUM (CASE WHEN [Acct] = '30240' THEN [Amt] ELSE '0' END) AS "30240"
+	  ,SUM (CASE WHEN [Acct] = '30230' THEN [Amt] ELSE '0' END) AS "30230"	
+	  ,SUM (CASE WHEN [Acct] = '30235' THEN [Amt] ELSE '0' END) AS "30235"   
+	  ,SUM (CASE WHEN [Acct] = '30245' THEN [Amt] ELSE '0' END) AS "30245"     
+FROM [DW_Prod].[lithia].[vw_Schedules_Summary]
+WHERE ([Company_Name] LIKE ? AND [Current_Month] = ? AND [Sched] = '41') OR ([CoNo] = ? AND [Current_Month] = ? AND [Sched] = '41') 
+GROUP BY [Control],[Control_Name],[VIN]
+HAVING ABS (SUM (CASE WHEN [Acct] = '23200' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '23210' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '33000' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '30240' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '30230' THEN [Amt] ELSE 0 END))	
+	  + ABS (SUM (CASE WHEN [Acct] = '30235' THEN [Amt] ELSE 0 END))   
+	  + ABS (SUM (CASE WHEN [Acct] = '30245' THEN [Amt] ELSE 0 END)) <> 0 
+ORDER BY [Control]
+
+<<<Schedule 42>>>
+
+SELECT [Control] AS "Vehicle"
+      ,MAX (DATEDIFF (DAY,[DOOSI],[Current_Month] + 30)) AS "Days"
+      ,[Control_Name] AS " Year/Make/Model"
+	  ,[VIN] AS "Serial"
+	  ,SUM (CASE WHEN [Acct] = '24000' THEN [Amt] ELSE '0' END) AS "24000"
+	  ,SUM (CASE WHEN [Acct] = '24010' THEN [Amt] ELSE '0' END) AS "24010"
+	  ,SUM (CASE WHEN [Acct] = '24020' THEN [Amt] ELSE '0' END) AS "24020"
+	  ,SUM (CASE WHEN [Acct] = '24030' THEN [Amt] ELSE '0' END) AS "24030"
+	  ,SUM (CASE WHEN [Acct] = '24040' THEN [Amt] ELSE '0' END) AS "24040"	
+	  ,SUM (CASE WHEN [Acct] = '24045' THEN [Amt] ELSE '0' END) AS "24045"      
+FROM [DW_Prod].[lithia].[vw_Schedules_Summary]
+WHERE ([Company_Name] LIKE ? AND [Current_Month] = ? AND [Sched] = '42') OR ([CoNo] = ? AND [Current_Month] = ? AND [Sched] = '42') 
+GROUP BY [Control],[Control_Name],[VIN]
+HAVING ABS (SUM (CASE WHEN [Acct] = '24000' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '24010' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '24020' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '24030' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '24040' THEN [Amt] ELSE 0 END))	
+	  + ABS (SUM (CASE WHEN [Acct] = '24045' THEN [Amt] ELSE 0 END)) <> 0 
+ORDER BY [Control]
+
+<<<Schedule 44>>>
+
+SELECT [Control] AS "Vehicle"
+      ,MAX (DATEDIFF (DAY,[DOOSI],[Current_Month] + 30)) AS "Days"
+      ,[Control_Name] AS " Year/Make/Model"
+	  ,[VIN] AS "Serial"
+	  ,SUM (CASE WHEN [Acct] = '26100' THEN [Amt] ELSE '0' END) AS "26100"
+	  ,SUM (CASE WHEN [Acct] = '26110' THEN [Amt] ELSE '0' END) AS "26110"
+	  ,SUM (CASE WHEN [Acct] = '34100' THEN [Amt] ELSE '0' END) AS "34100"
+	  ,SUM (CASE WHEN [Acct] = '71205' THEN [Amt] ELSE '0' END) AS "71205"
+	  ,SUM (CASE WHEN [Acct] = '71190' THEN [Amt] ELSE '0' END) AS "71190"     
+FROM [DW_Prod].[lithia].[vw_Schedules_Summary]
+WHERE ([Company_Name] LIKE ? AND [Current_Month] = ? AND [Sched] = '44') OR ([CoNo] = ? AND [Current_Month] = ? AND [Sched] = '44') 
+GROUP BY [Control],[Control_Name],[VIN]
+HAVING ABS (SUM (CASE WHEN [Acct] = '26100' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '26110' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '34100' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '71205' THEN [Amt] ELSE 0 END))
+	  + ABS (SUM (CASE WHEN [Acct] = '71190' THEN [Amt] ELSE 0 END)) <> 0 
+ORDER BY [Control]
+
+
+	

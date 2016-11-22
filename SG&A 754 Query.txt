@@ -1,0 +1,9 @@
+SELECT *
+FROM [DW_Prod].[lithia].[vw_GL_Detail]
+WHERE [AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] IN ('71760','71765','71770','75401','75402','75403','75404','75405') AND [CoNo] < 20000 AND [CoNo] NOT IN ('1','12','13','14','16','18','21','22','171','255','260','261','729')
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] IN ('75400','75450') AND [CoNo] = '1'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '75400' AND [CoNo] = '21'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '75400' AND [CoNo] = '238'

@@ -1,0 +1,16 @@
+RO Data Pull
+
+SELECT DISTINCT svc_ServiceDetail.LaborSaleCo, svc_ServiceHeader.VIN, svc_ServiceHeader.PostingDate, svc_ServiceHeader.Mileage, svc_ServiceDetail.RoNum, svc_ServiceDetail.LineCode
+FROM Dev.dbo.svc_ServiceDetail svc_ServiceDetail, Dev.dbo.svc_ServiceHeader svc_ServiceHeader
+WHERE svc_ServiceHeader.Mileage > '1000' AND svc_ServiceDetail.LineCode = 'A' AND svc_ServiceDetail.RoNum = svc_ServiceHeader.RoNum AND svc_ServiceDetail.Cora_Acct_Id = svc_ServiceHeader.Cora_Acct_Id AND ((svc_ServiceHeader.PostingDate Between ? And ?))
+
+Sales Data Pull
+
+SELECT [CoNo]
+       ,[Company_Name]
+       ,[DealNum]
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+JOIN [[DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History] as p 
+on s.CoNo = p.CoNo 
+WHERE ([MasterDate] Between ? And ?) AND ([SaleStatus] = 'Finalized') AND ([NewUsed] = 'Used Vehicle') AND ([SaleCat] = 'Retail')
+

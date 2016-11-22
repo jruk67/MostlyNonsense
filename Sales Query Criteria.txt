@@ -1,0 +1,43 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT [CoNo]
+      ,[Company_Name]
+      ,[DealNum]
+      ,[MasterDate]
+      ,[ContractDate]
+      ,[SaleDate]
+      ,[UWFlag]
+      ,[NewUsed]
+      ,[CarTrk]
+      ,[SaleCat]
+      ,[Stock]
+      ,[VIN]
+      ,[Age]
+      ,[Year]
+      ,[Make]
+      ,[Model]
+      ,[LClass]
+      ,[SPEClass]
+      ,[MSRP]
+      ,[InvSource]
+      ,[PayType]
+      ,[Total_Deal_Gross]
+      ,[Total_Amount_Financed]
+      ,[Vehicle_Sale_Price]
+      ,[Accessories_Sale_Price]
+      ,[Total_Vehicle_Sale_Price]
+      ,[Total_Vehicle_Inventory_Cost]
+      ,[Vehicle_Cost_Adjustments]
+      ,[Total_Vehicle_Cost]
+      ,[Front_End_Gross]
+      ,[Back_End_Gross]
+      ,[TotTradeAllow]
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE ([UWFlag]='N') AND ([MasterDate] between '1/1/2015' and '7/21/2015' AND [ContractDate]>[SaleDate]) OR ([UWFlag]='N') AND ([MasterDate] between '1/1/2015' and '7/21/2015' AND 
+[Total_Amount_Financed]>1.2*[Total_Vehicle_Sale_Price]) OR ([UWFlag]='N') AND ([MasterDate] between '1/1/2015' and '7/21/2015' AND [Total_Deal_Gross]>'10000') OR ([UWFlag]='N') AND 
+([MasterDate] between '1/1/2015' and '7/21/2015' AND [Total_Deal_Gross]<'-5000') OR ([MasterDate] between '1/1/2015' and 
+'7/21/2015' AND [TotTradeAllow]>'5000') OR ([UWFlag]='N') AND ([MasterDate] between '1/1/2015' and '7/21/2015' AND [TotTradeAllow]<'-5000')

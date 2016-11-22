@@ -1,0 +1,48 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+Contract Print Dates:
+
+SELECT (CAST ([CoNo] AS VARCHAR (10)) + '-' + [DealNumber]) AS "LUID",[CoNo],[DealNumber],[FormID],[Description], MAX ([Print_Date])
+AS Last
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History]
+WHERE (([Print_Date] Between ? And ?) AND ([FormID] In ('3','553','3776*1', '553B','3L','553A','553F','553G','553SP','AFSL','AFCU','AFSLW','AHFL','AHFL1','AHFLL','AHFLR','AHFLZ','AHFR','AHFRD','BMWL','BMWL1','BMWL','BMWR','BO','BOH','BSC','CFR','CMBR','DACU','ECCA1','FMCL','FMCLM','FMCR','GMAL1','GMALI','GMAR','GMCU','GRC','GRCA','GRCF','HML','LL','MACL','MACSD','MBCL','MFL','MINIL','NMAI','NMAL','NMAR','NMCL','NML','NMLI','SAFCU','AL','ECOR1','BOWL','CURT','GRCAB','OADA','PFSI','PFSL','RIC','SACL','SMFL','TMCL','TMCLO','TMCR','USBL','VCIL','Z553','ZGRC','CUR','GRC2','GMAL','MFCU','SACLT','TMCL1','ECCA2','SMART','ZMBCL','CMBL','CAC','553T','RICN','BMWLX','TMCL2','VFCU','WFBL','CCL','MBCL1','AHFRD','SMAR1','MINIR','ACFLX','SACLX','GRCV','ACFL','BMWRI','VCIL','GMFL','2550A','17293*','24205*','35459*','GMFLX'))
+GROUP BY [CoNo],[DealNumber],[FormID],[Description],[Print_Date]
+ORDER BY [Print_Date] DESC
+
+DA Print Dates:
+
+SELECT (CAST ([CoNo] AS VARCHAR (10)) + '-' + [DealNumber]) AS "LUID",[CoNo],[DealNumber],[FormID],[Description], MAX ([Print_Date])
+AS Last
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History]
+WHERE (([Print_Date] Between '8/24/2015' and '10/7/2015') AND [Description] Like ('%DELIVERY AGREEMENT%')) OR (([Print_Date] Between '8/24/2015' and '10/7/2015') AND [FormID] = ('CCOA'))
+GROUP BY [CoNo],[DealNumber],[FormID],[Description]
+
+New Sales Detail:
+
+SELECT vw_GL_Detail.CoNo, vw_GL_Detail.Name, vw_GL_Detail.AcctgDate, vw_GL_Detail.Jnl, vw_GL_Detail.Reference, vw_GL_Detail.Control, SUM(Amt) AS 'Total'
+FROM DW_Prod.lithia.vw_GL_Detail vw_GL_Detail
+WHERE [CoNo] < '20000' AND (vw_GL_Detail.AcctNum Like '40%00') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%50') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%01') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%51') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%20') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%70') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%21') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%71') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%00') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%50') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%01') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%51') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%20') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%70') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%21') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%71') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%30') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%31') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%40') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%41') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%30') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%31') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%40') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%41') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%80') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%81') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%80') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%81') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%90') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '40%91') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%90') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND  (vw_GL_Detail.AcctNum Like '41%91') AND (vw_GL_Detail.AcctgDate Between ? And ?)
+GROUP BY vw_GL_Detail.CoNo, vw_GL_Detail.Name, vw_GL_Detail.AcctgDate, vw_GL_Detail.Jnl, vw_GL_Detail.Reference, vw_GL_Detail.Control
+
+Used Sales Detail:
+
+SELECT vw_GL_Detail.CoNo, vw_GL_Detail.Name, vw_GL_Detail.AcctgDate, vw_GL_Detail.Jnl, vw_GL_Detail.Reference, vw_GL_Detail.Control, Sum(vw_GL_Detail.Amt) AS 'Total'
+FROM DW_Prod.lithia.vw_GL_Detail vw_GL_Detail
+WHERE [CoNo] < '20000' AND (vw_GL_Detail.AcctNum Not In ('431','432','433') AND vw_GL_Detail.AcctNum Between '43000' And '43399') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND (vw_GL_Detail.AcctNum Between '43480' And '43499') AND (vw_GL_Detail.AcctgDate Between ? And ?) OR [CoNo] < '20000' AND (vw_GL_Detail.AcctNum In ('80490','80495')) AND (vw_GL_Detail.AcctgDate Between ? And ?)
+GROUP BY vw_GL_Detail.CoNo, vw_GL_Detail.Name, vw_GL_Detail.AcctgDate, vw_GL_Detail.Jnl, vw_GL_Detail.Reference, vw_GL_Detail.Control
+
+SELECT (CAST ([CoNo] AS VARCHAR (10)) + '-' + [DealNumber]) AS "LUID",[CoNo],[DealNumber],[FormID],[Description], MAX ([Print_Date])
+AS Last
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History]
+WHERE ([CoNo] = ?) AND ([Print_Date] Between ? and ?) AND ([FormID] In ('3','553','3776*1', '553B','3L','553A','553F','553G','553SP','AFSL','AFCU','AFSLW','AHFL','AHFL1','AHFLL','AHFLR','AHFLZ','AHFR','AHFRD','BMWL','BMWL1','BMWL','BMWR','BO','BOH','BSC','CFR','CMBR','DACU','ECCA1','FMCL','FMCLM','FMCR','GMAL1','GMALI','GMAR','GMCU','GRC','GRCA','GRCF','HML','LL','MACL','MBCL','MFL','MINIL','NMAI','NMAL','NMAR','NMCL','NML','NMLI','SAFCU','AL','ECOR1','BOWL','CURT','GRCAB','OADA','PFSI','PFSL','RIC','SACL','SMFL','TMCL','TMCLO','TMCR','USBL','VCIL','Z553','ZGRC','CUR','GRC2','GMAL','MFCU','SMART','ZMBCL','CMBL','CAC','553T','RICN','BMWLX','TMCL2','VFCU','WFBL','CCL','MBCL1','AHFRD','SMAR1','MINIR','ACFLX','SACLX','GRCV','ACFL','BMWRI','VCIL','GMFL','2550A','17293*','24205*','35459*'))
+GROUP BY [CoNo],[DealNumber],[FormID],[Description]
+
+SELECT (CAST ([CoNo] AS VARCHAR (10)) + '-' + [DealNumber]) AS "LUID",[CoNo],[DealNumber],[FormID],[Description], MAX ([Print_Date])
+AS Last
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History]
+WHERE (([CoNo] = ?) AND ([Print_Date] Between '1/1/2015' and '12/31/2015') AND ([Description] LIKE ('%DELIVERY AGREEMENT%'))) OR (([CoNo] = ?) AND ([Print_Date] Between '1/1/2015' and '12/31/2015') AND ([FormID] = ('CCOA')))
+GROUP BY [CoNo],[DealNumber],[FormID],[Description]

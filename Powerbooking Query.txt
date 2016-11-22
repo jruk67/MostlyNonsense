@@ -1,0 +1,47 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT [CoNo] AS "Company Number"
+      ,[Company_Name] AS "Company Name"
+      ,[DealNum] AS "Deal Number"
+      ,[SaleDate] AS "Sale Date"
+      ,[NewUsed] AS "New or Used"
+      ,[Stock]
+      ,[VIN]
+      ,[Age]
+      ,[Year]
+      ,[Make]
+      ,[Model]
+      ,[MSRP]
+      ,[Sp1] AS "Sales Person"
+      ,[FIMgr] "Finance Manager"
+      ,[Finance_Company_Name] AS "Lender Name"
+      ,[Bank_Fee]
+      ,[Finance_Term_Length]
+      ,[Total_Amount_Financed]
+      ,[BuyRate]
+      ,[SellRate]
+      ,[Spread]
+      ,[Monthly_Payment]
+      ,[Total_Finance_Charge]
+      ,[Down_Payment_Customer]
+      ,[Down_Payment_Other]
+      ,[Down_Payment_Total]
+      ,[Total_Deal_Gross]
+      ,[Factory_Rebate]
+      ,[Vehicle_Sale_Price]
+      ,[Accessories_Sale_Price]
+      ,[Total_Vehicle_Sale_Price]
+      ,[Total_Vehicle_Inventory_Cost]
+      ,[Vehicle_Cost_Adjustments]
+      ,[Total_Vehicle_Cost]
+      ,[Front_End_Gross]
+      ,[Back_End_Gross]
+      ,[TotTradeAllow]
+      ,[TotTradeACV]
+      ,[TotTradeO/A]
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE ([UWFlag]='N') and ([SaleCat]='Retail') and ([SaleStatus]='Finalized') and ([PayType]='Finance') and ([SaleDate] between '1/1/2015' and '12/31/2015')

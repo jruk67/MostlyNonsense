@@ -1,0 +1,13 @@
+SELECT [DealNum] AS "Deal #"
+      ,[NewUsed] AS "Sale Type"
+      ,[Year] + ' ' + [Make] + ' ' + [Model] AS "Vehicle"
+      ,[Stock] AS "Stock #"
+      ,[Customer]
+      ,[BookedDate] AS "Booked Date"
+      ,[PendingDate] AS "Pending Date"
+      ,[Sp1] AS "Salesperson"
+      ,[FIMgr] AS "F&I Manager"
+      ,[T1Stk] AS "Trade Stock #"
+      ,[T1Make] + ' ' + [T1Model] AS "Trade Vehicle" 
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE ((([Company_Name] LIKE ?) AND ([BookedDate] = ?) AND ([SaleCat] = 'Retail')) OR (([CoNo] = ?) AND ([BookedDate] = ?) AND ([SaleCat] = 'Retail'))) OR ((([Company_Name] LIKE ?) AND ([PendingDate] = ?) AND ([SaleCat] = 'Retail')) OR (([CoNo] = ?) AND ([PendingDate] = ?) AND ([SaleCat] = 'Retail')))

@@ -1,0 +1,19 @@
+SELECT o.[CoNo]
+      ,o.[Name]
+      ,o.[Reference] AS "Check #"
+      ,o.[AcctNum]
+      ,o.[GL Amt]
+      ,o.[ODC Amt]
+      ,o.[AcctgDate]
+      ,o.[ODC Payee]
+      ,o.[ODC Comment]
+      ,o.[ODC Address]
+      ,o.[ODC City]
+      ,o.[ODC ST]
+      ,o.[ODC ZIP]
+      ,o.[Entered]
+FROM [DW_Prod].[lithia].[vw_GL_ODC] AS o
+LEFT JOIN [DW_Prod].[dbo].[Dim_Company] AS c
+ON o.[CoNo] = c.[Company_Number]
+WHERE (o.[Name] LIKE ? AND o.[Entered] between ? and ? AND o.[ODC Amt]<'50000'AND c.[Active_Flag] = 'Y' AND c.[Store_Type_Cd] = 'D')
+OR (o.[CoNo] = ? AND o.[Entered] between ? and ? AND o.[ODC Amt]<'50000' AND c.[Active_Flag] = 'Y' AND c.[Store_Type_Cd] = 'D')

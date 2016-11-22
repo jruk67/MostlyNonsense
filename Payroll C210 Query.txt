@@ -1,0 +1,7 @@
+SELECT c.[Company_Number], c.[Company_Name], g.[Accounting_Date_Key], g.[Posting_Date_Key], g.[Posting_Amount], a.[Account_Number],  a.[Account_Description], a.[Account_Type]
+FROM [DW_Prod].[dbo].[Fact_GL_Transaction] as g
+JOIN [DW_Prod].[dbo].[Dim_GL_Account] as a
+ON g.[Account_Key] = a.[Account_Key]
+JOIN [DW_Prod].[dbo].[Dim_Company] as c
+ON g.[Company_Key] = c.[Company_Key]
+WHERE (c.[Company_Name] LIKE ? AND g.[Accounting_Date_Key] = ? AND a.[Account_Number] IN ('26600','33120','71101','71103','71301','71303','72105','72107','72111','72113','72211','72213','72215','72217','72301','72303','72305','72307','72315','72317','72641','72905') AND g.[Posting_Amount] > 0) OR (c.[Company_Number] = ? AND g.[Accounting_Date_Key] = ? AND a.[Account_Number] IN ('26600','33120','71101','71103','71301','71303','72105','72107','72111','72113','72211','72213','72215','72217','72301','72303','72305','72307','72315','72317','72641','72905') AND g.[Posting_Amount] > 0)

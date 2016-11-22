@@ -1,0 +1,6 @@
+SELECT DISTINCT [Company_Name], SUM ([Posting_Amount]) AS "Total $" 
+FROM [DW_Prod].[dbo].[Fact_GL_Transaction] as f
+JOIN [DW_Prod].[dbo].[Dim_Company] as c 
+on f.Company_Key = c.Company_Key 
+WHERE ([Account_Key] > '51808') AND ([Company_Number] < '701') AND ([Posting_Amount] > 0) AND ([Accounting_Date_Key] between '20150701' and '20150731')
+GROUP BY [Company_Name]

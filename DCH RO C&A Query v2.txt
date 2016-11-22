@@ -1,0 +1,25 @@
+SELECT DISTINCT dco.[State_Name], dco.[Company_Name], dco.[Company_Number], sth.[RO_Number], sth.[Tech_Number]
+, de.[Employee_ID], (de.[First_Name] + ' ' + de.[Last_Name]) AS "Tech Name", de.[Job_Code_Desc], SUM (ssh.[Labor_Sale]) AS "Labor Sale" 
+FROM [DW_Dev].[svc].[service_sales_tech_hours] AS sth
+JOIN [DW_Dev].[svc].[service_sales_header] AS ssh
+ON sth.[RO_Number] = ssh.[RO_Number]
+JOIN [DW_Dev].[dbo].[Dim_Employee] AS de
+ON sth.[Tech_Number] = de.[Employee_ID]
+JOIN [DW_Dev].[dbo].[Dim_Company] AS dco
+ON de.[Location_Desc] = dco.[Company_Name]
+WHERE dco.[Company_Number] > '20000' AND ssh.[Close_Date] BETWEEN '2/1/2016' AND '2/29/2016'
+GROUP BY dco.[State_Name], dco.[Company_Name], dco.[Company_Number], sth.[RO_Number], sth.[Tech_Number], de.[Employee_ID], de.[First_Name], 
+de.[Last_Name], de.[Job_Code_Desc]
+ORDER BY dco.[Company_Name], sth.[RO_Number] ASC
+
+Select dc.State_Name, dc.Company_Name, ro.RO_Number, de.Employee_ID, (de.[First_Name] + ' ' + de.[Last_Name]) AS "Tech Name", de.Job_Code_Desc
+From [dbo].[Fact_Service_Tech_Hours] fsth
+	join [dbo].[Dim_Employee] de
+		on fsth.Technician_Key = de.Employee_Key
+	join dbo.Dim_Company dc
+		on fsth.Company_Key = dc.Company_Key
+	join [dbo].[Dim_Service_Sale_Repair_Order] AS RO
+		on fsth.Repair_Order_Key = ro.Repair_Order_Key
+Where [Close_Date_Key] between 20160201 and 20160229
+	and dc.[Company_Number] > '20000'
+Group by dc.State_Name, dc.Company_Name, ro.RO_Number, de.Employee_ID, (de.[First_Name] + ' ' + de.[Last_Name]), de.Job_Code_Desc

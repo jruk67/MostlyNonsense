@@ -1,0 +1,11 @@
+SELECT VI.[CoNo] AS "Store #"
+      ,VI.[Name] AS "Store Name"
+      ,MAX (GL.[AcctgDate]) AS "True Date"
+      ,VI.[VIN]
+      ,VI.[Stock]
+FROM [DW_Prod].[lithia].[vw_Vehicle_Inventory] AS VI
+LEFT JOIN [DW_Prod].[lithia].[vw_GL_Detail] AS GL
+ON VI.[Stock] = GL.[Control]
+WHERE VI.[Description] = 'Retail' AND VI.[StoreAge] > '200' AND VI.[N/U] = 'U' AND GL.[Jnl] IN ('10','10L','20','20L') AND GL.[AcctNum] IN ('21100','24010','24000','24020','24030','24040','24045')
+GROUP BY VI.[CoNo],VI.[Name], VI.[VIN], VI.[Stock]
+ORDER BY VI.[CoNo], VI.[VIN] DESC

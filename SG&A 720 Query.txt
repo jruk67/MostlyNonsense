@@ -1,0 +1,7 @@
+SELECT *
+FROM [DW_Prod].[lithia].[vw_GL_Detail]
+WHERE [AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] IN ('76236','76219','75600','75620','75640','76100','75660','76200','76300') AND [CoNo] = '105'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '76200' AND [CoNo] = '21'
+OR
+[AcctgDate] BETWEEN '1/1/2015' AND '12/31/2015' AND [AcctNum] = '76200' AND [CoNo] = AND [CoNo] = '18'

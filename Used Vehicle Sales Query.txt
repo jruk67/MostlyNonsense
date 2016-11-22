@@ -1,0 +1,9 @@
+SELECT DISTINCT [Company_Name], SUM ([Posting_Amount]) AS "Total $" 
+FROM [DW_Prod].[dbo].[Fact_GL_Transaction] as f
+JOIN [DW_Prod].[dbo].[Dim_Company] as c 
+on f.Company_Key = c.Company_Key
+JOIN [DW_Prod].[dbo].[Dim_GL_Account] as a
+on f.Account_Key = a.Account_Key
+WHERE (f.[Accounting_Date_Key] between '20150901' and '20150930') AND (c.[Company_Number] < '700') AND (c.[Company_Number] NOT IN ('1','3','12','13','14','16','18','21','22','105','171','238','255','260','261')) AND (a.[Account_Number] BETWEEN '43480' and '43499') OR (f.[Accounting_Date_Key] between '20150901' and '20150930') AND (c.[Company_Number] < '700') AND (c.[Company_Number] NOT IN ('1','3','12','13','14','16','18','21','22','105','171','238','255','260','261')) AND (a.[Account_Number] IN ('80490','80495'))
+GROUP BY [Company_Name]
+ORDER BY "Total $" DESC

@@ -1,0 +1,17 @@
+<<Connection String>>
+
+DRIVER=SQL Server;SERVER=NTDW-SQLDBC-ASP;UID=James Ryan;Trusted_Connection=Yes;APP=Microsoft Office 2013;WSID=JAMES-RYAN
+
+<<Command Text>>
+
+SELECT [CoNo],[DealNumber],[FormID],[Description], MAX ([Print_Date])
+AS Last
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History]
+WHERE (([Print_Date] Between ? And ?) AND ([FormID] In ('3','553','3776*1', '553B','3L','553A','553F','553G','553SP','AFSL','AFCU','AFSLW','AHFL','AHFL1','AHFLL','AHFLR','AHFLZ','AHFR','AHFRD','BMWL','BMWL1','BMWL','BMWR','BO','BOH','BSC','CFR','CMBR','DACU','ECCA1')) OR ([Print_Date] Between '5/24/2015' And '7/7/2015') AND [FormID] In ('FMCL','FMCLM','FMCR','GMAL1','GMALI','GMAR','GMCU','GRC','GRCA','GRCF','HML','LL','MACL','MBCL','MFL','MINIL','NMAI','NMAL','NMAR','NMCL','NML','NMLI','SAFCU','AL','ECOR1','BOWL','CURT','GRCAB')) OR ([Print_Date] Between '5/24/2015' And '7/7/2015') AND ([FormID] In ('OADA','PFSI','PFSL','RIC','SACL','SMFL','TMCL','TMCLO','TMCR','USBL','VCIL','Z553','ZGRC','CUR','GRC2','GMAL','MFCU','SMART','ZMBCL','CMBL','CAC','553T','RICN','BMWLX','TMCL2','VFCU','WFBL')) OR ([Print_Date] Between '5/24/2015' And '7/7/2015') AND ([FormID] In ('CCL','MBCL1','AHFRD','SMAR1','MINIR','ACFLX','SACLX','GRCV','ACFL','BMWRI','VCIL','GMFL','2550A','17293*','24205*','35459*'))
+GROUP BY [CoNo],[DealNumber],[FormID],[Description],[Type]
+
+SELECT [CoNo],[DealNumber],[FormID],[Description],[Type], MAX ([Print_Date])
+AS Last
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales_Form_Print_History]
+WHERE (([Print_Date] Between ? and ?) AND [Description] Like ('%DELIVERY AGREEMENT%')) OR (([Print_Date] Between ? and ?) AND [FormID] = ('CCOA'))
+GROUP BY [CoNo],[DealNumber],[FormID],[Description]

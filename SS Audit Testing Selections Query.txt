@@ -1,0 +1,28 @@
+SELECT [NewUsed] AS "Sale Type"
+       ,[PayType] AS "Finance Source" 
+       ,[DealNum] AS "Deal #"
+       ,[MasterDate] AS "GL Date"
+       ,[Total_Vehicle_Sale_Price] AS "Sale Amount"
+       ,[Stock] AS "Stock #"
+       ,[Customer]
+       ,[Year] + ' ' + [Make] + ' ' + [Model] AS "Vehicle"
+       ,[FIMgr] AS "Fin. Mgr"
+       ,[DeskMgr] AS "Desk Mgr"
+       ,[Sp1] AS "Sales Person #1"
+       ,[Sp2] AS "Sales Person #2"       
+       ,[CoNo]
+       ,[Company_Name]
+       ,[ContractDate]
+       ,[SaleDate]
+       ,[VIN]
+       ,[Factory_Rebate]
+       ,[BuyRate]
+       ,[SellRate]
+       ,[Spread]
+       ,[Total_Deal_Gross]
+       ,[Vehicle_Sale_Price]
+       ,[Accessories_Sale_Price]
+       ,[TotTradeAllow]
+       ,[TotTradeACV]
+FROM [DW_Prod].[lithia].[vw_Vehicle_Sales]
+WHERE ([CoNo] = ?) AND ([SaleDate] between ? and ?) AND ([UWFlag]='N') AND ([SaleCat]='Retail')

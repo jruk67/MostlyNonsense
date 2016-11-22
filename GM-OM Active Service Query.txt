@@ -1,0 +1,17 @@
+SELECT ([First_Name] + ' ' + [Last_Name]) AS "Name"
+      ,[Job_Code_Desc] AS "Job Title"
+      ,[Reporting_Location] AS "Company #"
+	  ,[Location_Desc] AS "Company Name"
+      ,[Employee_Status] 
+	  ,[Service_Date]
+	  ,COUNT ([Employee_ID]) AS "Count of MGMT"    
+FROM [DW_Prod].[lithia].[vw_Employee]
+WHERE [Job_Code_Desc] IN ('General Manager','Senior Office Manager','Office Manager') AND [Employee_Status] = 'A'
+GROUP BY [First_Name]
+        ,[Last_Name] 
+        ,[Job_Code_Desc] 
+        ,[Reporting_Location]
+	    ,[Location_Desc] 
+        ,[Employee_Status]
+        ,[Service_Date]
+ORDER BY [Service_Date]

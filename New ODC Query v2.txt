@@ -1,0 +1,23 @@
+SELECT o.[CoNo]
+      ,o.[Name]
+      ,o.[Reference] AS "Check #"
+      ,o.[AcctNum]
+      ,o.[GL Amt]
+      ,o.[ODC Amt]
+      ,o.[AcctgDate]
+      ,o.[ODC Payee]
+      ,UPPER (e.[Last_Name] + ',' + e.[First_Name] + ' ' + e.[Middle_Name]) AS "Employee Name"
+      ,o.[ODC Comment]
+      ,o.[ODC Address]
+      ,o.[ODC City]
+      ,o.[ODC ST]
+      ,o.[ODC ZIP]
+      ,o.[Entered]
+FROM [DW_Prod].[lithia].[vw_GL_ODC] AS o
+LEFT JOIN [DW_Prod].[dbo].[Dim_Company] AS c
+ON o.[CoNo] = c.[Company_Number]
+LEFT JOIN [DW_Prod].[lithia].[vw_Employee] AS e
+ON c.[LCoNo] = e.[Reporting_Location] AND o.[ODC Payee] LIKE '%' + e.[Last_Name] + '%'
+WHERE (o.[Name] LIKE ? AND o.[Entered] BETWEEN ? AND ? AND o.[ODC Amt]<'50000')
+OR (o.[CoNo] = ? AND o.[Entered] BETWEEN ? AND ? AND o.[ODC Amt]<'50000')
+ORDER BY o.[Reference] ASC

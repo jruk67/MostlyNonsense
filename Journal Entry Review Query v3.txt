@@ -1,0 +1,22 @@
+SELECT d.[CoNo]
+,d.[Name]
+,d.[AcctgDate]
+,d.[Posted]
+,d.[Amt]
+,d.[AcctNum]
+,d.[Account_Description]
+,d.[IC]
+,d.[Jnl]
+,d.[JnlName]
+,d.[Control]
+,d.[Doc_Description]
+,d.[Detail_Description]
+,d.[User_ID]
+,d.[User_Name]
+,e.[Job_Code_Desc]
+,e.[Dept_Desc]
+FROM [DW_Prod].[lithia].[vw_GL_Detail] AS d
+LEFT JOIN [DW_Prod].[lithia].[vw_Employee] AS e
+ON e.[Employee_ID] = RIGHT(User_ID,(LEN(User_ID)-2))
+WHERE (d.[Name] LIKE ? AND d.[AcctgDate] BETWEEN ? AND ? AND d.[IC] NOT IN ('ODC','SVC','PT','CP') AND d.[Jnl] NOT IN ('FC','88') AND d.[Void] = 0 AND d.[Amt] <> 0 AND [CoNo] NOT IN ('1','3','12','13','14','16','18','21','22','50','56','60','75','79','81','85','105','161','168','171','238','260','261','255','264','265','266','268','502','503','504') AND [User_ID] NOT IN ('na','laojbstk') AND [User_Name] <> 'CSR') OR (d.[CoNo] = ? AND d.[AcctgDate] BETWEEN ? AND ? AND  d.[IC] NOT IN ('ODC','SVC','PT','CP') AND d.[Jnl] NOT IN ('FC','88') AND d.[Void] = 0 AND d.[Amt] <> 0 AND [CoNo] NOT IN ('1','3','12','13','14','16','18','21','22','50','56','60','75','79','81','85','105','161','168','171','238','260','261','255','264','265','266','268','502','503','504') AND [User_ID] NOT IN ('na','laojbstk') AND [User_Name] <> 'CSR')
+ORDER BY ABS (d.[Amt]) DESC
